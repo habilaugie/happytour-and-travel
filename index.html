@@ -1,0 +1,2260 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PT. Happy Tour & Travel — Your Next Escape Starts Here</title>
+    <meta name="description" content="Agen perjalanan resmi di Batam (PT. Happy Tour and Travel). Temukan paket wisata Batam, Bintan, Malaysia, Singapore, & Honeymoon terbaik.">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            teal: '#0F766E',
+                            deep: '#134E4A',
+                            sky: '#38BDF8',
+                            lightSky: '#E0F2FE',
+                            bg: '#F8FAFC',
+                            text: '#0F172A',
+                            muted: '#64748B',
+                            navy: '#0B192C',
+                            gold: '#D4AF37'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Alpine.js & Lucide Icons -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        [x-cloak] { display: none !important; }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.90);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        button, a, select, input, .hover-smooth {
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        @media (prefers-reduced-motion: reduce) {
+            button, a, select, input, .hover-smooth {
+                transition: none !important;
+            }
+        }
+    </style>
+</head>
+<body class="bg-brand-bg text-brand-text font-sans antialiased selection:bg-brand-sky selection:text-brand-deep flex flex-col min-h-screen" x-data="happyTourApp()" x-init="initApp()">
+
+    <!-- Top Announcement Banner -->
+    <div class="bg-slate-900 text-slate-100 text-xs py-2 px-4 border-b border-teal-900/40 relative z-50">
+        <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
+            <div class="flex items-center gap-2">
+                <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-teal-500/20 text-teal-300 font-semibold text-[11px] border border-teal-500/30 shrink-0">
+                    <i data-lucide="sparkles" class="w-3.5 h-3.5 text-brand-sky shrink-0"></i> 
+                    <span>Official Agent</span>
+                </span>
+                <span class="hidden sm:inline text-slate-300 font-medium">PT. Happy Tour and Travel — Batam City, Kepulauan Riau</span>
+            </div>
+            <div class="flex items-center gap-4 text-[11px] font-medium text-slate-300 ml-auto sm:ml-0">
+                <a href="https://wa.me/6285355748039" target="_blank" class="hover:text-brand-sky transition flex items-center gap-1">
+                    <i data-lucide="phone-call" class="w-3 h-3 text-brand-sky"></i> +62-853-5574-8039
+                </a>
+                <span class="hidden md:inline text-slate-600">|</span>
+                <span class="hidden md:inline-flex items-center gap-1 text-emerald-400">
+                    <i data-lucide="check-circle-2" class="w-3 h-3"></i> <span x-text="t('top_daily_departures')"></span>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sticky Header / Navbar -->
+    <header class="sticky top-0 z-40 w-full transition-all duration-300 glass-panel border-b border-slate-200/80 shadow-sm shrink-0">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Brand Logo (Replaced Gemini icon with clean company branding) -->
+            <button @click="navigate('home')" class="flex items-center space-x-3 group focus:outline-none">
+                <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-brand-navy border-2 border-brand-gold flex items-center justify-center p-1 shadow-md group-hover:scale-105 transition-transform overflow-hidden shrink-0">
+                    <svg viewBox="0 0 100 100" class="w-full h-full">
+                        <circle cx="50" cy="50" r="46" fill="#0D2137" stroke="#D4AF37" stroke-width="3"/>
+                        <circle cx="50" cy="50" r="38" fill="none" stroke="#D4AF37" stroke-width="1.5"/>
+                        <circle cx="42" cy="38" r="16" fill="none" stroke="#D4AF37" stroke-width="1.5"/>
+                        <path d="M 26 38 H 58" stroke="#D4AF37" stroke-width="1.5"/>
+                        <path d="M 42 22 V 54" stroke="#D4AF37" stroke-width="1.5"/>
+                        <path d="M 30 30 Q 42 35 54 30" fill="none" stroke="#D4AF37" stroke-width="1"/>
+                        <path d="M 40 46 Q 52 42 66 32 L 62 26 L 68 28 L 74 24 L 72 31 L 76 34 L 70 36 Q 52 48 38 48 Z" fill="#D4AF37"/>
+                        <path d="M 48 22 Q 52 18 56 22 Q 60 18 64 22" fill="none" stroke="#FFFFFF" stroke-width="1.5"/>
+                        <path d="M 18 62 Q 34 54 50 62 T 82 62" fill="none" stroke="#1E6091" stroke-width="3.5"/>
+                        <path d="M 18 69 Q 34 61 50 69 T 82 69" fill="none" stroke="#1E6091" stroke-width="3"/>
+                        <path d="M 22 76 Q 36 70 50 76 T 78 76" fill="none" stroke="#1E6091" stroke-width="2.5"/>
+                    </svg>
+                </div>
+                <div class="text-left leading-tight">
+                    <span class="block text-xs font-semibold text-brand-gold tracking-wider">PT.</span>
+                    <span class="block text-base sm:text-lg font-extrabold tracking-tight text-brand-deep leading-none">HAPPY TOUR</span>
+                    <span class="text-[9px] sm:text-[10px] tracking-widest font-semibold text-brand-teal uppercase block">AND TRAVEL</span>
+                </div>
+            </button>
+
+            <!-- Desktop Navigation -->
+            <nav class="hidden xl:flex items-center space-x-1">
+                <button @click="navigate('home')" :class="currentView === 'home' ? 'text-brand-teal font-bold bg-teal-50/80' : 'text-brand-muted hover:text-brand-teal hover:bg-slate-50'" class="px-3 py-2 rounded-lg text-sm transition" x-text="t('nav_home')"></button>
+                <button @click="navigate('packages')" :class="currentView === 'packages' ? 'text-brand-teal font-bold bg-teal-50/80' : 'text-brand-muted hover:text-brand-teal hover:bg-slate-50'" class="px-3 py-2 rounded-lg text-sm transition" x-text="t('nav_packages')"></button>
+                <button @click="navigate('destinations')" :class="currentView === 'destinations' ? 'text-brand-teal font-bold bg-teal-50/80' : 'text-brand-muted hover:text-brand-teal hover:bg-slate-50'" class="px-3 py-2 rounded-lg text-sm transition" x-text="t('nav_destinations')"></button>
+                <button @click="navigate('services')" :class="currentView === 'services' ? 'text-brand-teal font-bold bg-teal-50/80' : 'text-brand-muted hover:text-brand-teal hover:bg-slate-50'" class="px-3 py-2 rounded-lg text-sm transition" x-text="t('nav_services')"></button>
+                <button @click="navigate('promos')" :class="currentView === 'promos' ? 'text-brand-teal font-bold bg-teal-50/80' : 'text-brand-muted hover:text-brand-teal hover:bg-slate-50'" class="px-3 py-2 rounded-lg text-sm transition" x-text="t('nav_promos')"></button>
+                <button @click="navigate('about')" :class="currentView === 'about' ? 'text-brand-teal font-bold bg-teal-50/80' : 'text-brand-muted hover:text-brand-teal hover:bg-slate-50'" class="px-3 py-2 rounded-lg text-sm transition" x-text="t('nav_about')"></button>
+                <button @click="navigate('gallery')" :class="currentView === 'gallery' ? 'text-brand-teal font-bold bg-teal-50/80' : 'text-brand-muted hover:text-brand-teal hover:bg-slate-50'" class="px-3 py-2 rounded-lg text-sm transition" x-text="t('nav_gallery')"></button>
+                <button @click="navigate('articles')" :class="currentView === 'articles' ? 'text-brand-teal font-bold bg-teal-50/80' : 'text-brand-muted hover:text-brand-teal hover:bg-slate-50'" class="px-3 py-2 rounded-lg text-sm transition" x-text="t('nav_articles')"></button>
+                <button @click="navigate('contact')" :class="currentView === 'contact' ? 'text-brand-teal font-bold bg-teal-50/80' : 'text-brand-muted hover:text-brand-teal hover:bg-slate-50'" class="px-3 py-2 rounded-lg text-sm transition" x-text="t('nav_contact')"></button>
+            </nav>
+
+            <!-- Actions & Language Switcher Dropdown -->
+            <div class="hidden xl:flex items-center space-x-3">
+                <div class="relative">
+                    <select @change="setLang($event.target.value)" :value="lang" class="bg-slate-100 text-slate-700 font-medium text-xs rounded-xl px-3 py-2 border border-slate-200 focus:outline-none focus:border-brand-teal cursor-pointer">
+                        <option value="id">🇮🇩 Bahasa Indonesia</option>
+                        <option value="ms">🇲🇾 Bahasa Melayu</option>
+                        <option value="en">🇬🇧 English</option>
+                    </select>
+                </div>
+
+                <button @click="navigate('admin')" class="px-3 py-2 text-xs font-semibold text-brand-muted hover:text-brand-teal border border-slate-200 rounded-lg transition flex items-center gap-1.5">
+                    <i data-lucide="layout-dashboard" class="w-3.5 h-3.5"></i> Admin
+                </button>
+                
+                <button @click="openWhatsApp('consultation')" class="relative group bg-gradient-to-r from-brand-teal to-teal-600 hover:from-brand-deep hover:to-brand-teal text-white px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold shadow-md hover:shadow-lg transition-all duration-300 flex items-center gap-2 border border-teal-400/20 active:scale-95">
+                    <i data-lucide="map-pinned" class="w-4 h-4 text-brand-sky group-hover:rotate-12 transition-transform"></i> 
+                    <span x-text="t('btn_consult_trip')"></span>
+                </button>
+            </div>
+
+            <!-- Mobile Hamburger & Language Selector -->
+            <div class="xl:hidden flex items-center space-x-2">
+                <select @change="setLang($event.target.value)" :value="lang" class="bg-slate-100 text-slate-700 text-xs rounded-lg px-2 py-1 border border-slate-200 focus:outline-none">
+                    <option value="id">ID</option>
+                    <option value="ms">MS</option>
+                    <option value="en">EN</option>
+                </select>
+                <button @click="navigate('admin')" class="p-2 text-brand-muted hover:text-brand-teal border border-slate-200 rounded-lg" title="Admin Panel">
+                    <i data-lucide="layout-dashboard" class="w-5 h-5"></i>
+                </button>
+                <button @click="mobileMenuOpen = !mobileMenuOpen" class="p-2 text-slate-600 hover:text-brand-teal focus:outline-none">
+                    <i data-lucide="menu" x-show="!mobileMenuOpen" class="w-6 h-6"></i>
+                    <i data-lucide="x" x-show="mobileMenuOpen" class="w-6 h-6" x-cloak></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div x-show="mobileMenuOpen" x-cloak class="xl:hidden bg-white border-b border-slate-200 px-4 pt-2 pb-6 space-y-1 shadow-xl">
+            <button @click="navigate('home'); mobileMenuOpen = false" class="block w-full text-left px-4 py-2.5 rounded-lg text-sm font-medium hover:bg-slate-50" x-text="t('nav_home')"></button>
+            <button @click="navigate('packages'); mobileMenuOpen = false" class="block w-full text-left px-4 py-2.5 rounded-lg text-sm font-medium hover:bg-slate-50" x-text="t('nav_packages')"></button>
+            <button @click="navigate('destinations'); mobileMenuOpen = false" class="block w-full text-left px-4 py-2.5 rounded-lg text-sm font-medium hover:bg-slate-50" x-text="t('nav_destinations')"></button>
+            <button @click="navigate('services'); mobileMenuOpen = false" class="block w-full text-left px-4 py-2.5 rounded-lg text-sm font-medium hover:bg-slate-50" x-text="t('nav_services')"></button>
+            <button @click="navigate('promos'); mobileMenuOpen = false" class="block w-full text-left px-4 py-2.5 rounded-lg text-sm font-medium hover:bg-slate-50" x-text="t('nav_promos')"></button>
+            <button @click="navigate('about'); mobileMenuOpen = false" class="block w-full text-left px-4 py-2.5 rounded-lg text-sm font-medium hover:bg-slate-50" x-text="t('nav_about')"></button>
+            <button @click="navigate('gallery'); mobileMenuOpen = false" class="block w-full text-left px-4 py-2.5 rounded-lg text-sm font-medium hover:bg-slate-50" x-text="t('nav_gallery')"></button>
+            <button @click="navigate('articles'); mobileMenuOpen = false" class="block w-full text-left px-4 py-2.5 rounded-lg text-sm font-medium hover:bg-slate-50" x-text="t('nav_articles')"></button>
+            <button @click="navigate('contact'); mobileMenuOpen = false" class="block w-full text-left px-4 py-2.5 rounded-lg text-sm font-medium hover:bg-slate-50" x-text="t('nav_contact')"></button>
+            <div class="pt-2">
+                <button @click="openWhatsApp('consultation'); mobileMenuOpen = false" class="w-full bg-brand-teal text-white py-3 rounded-xl font-bold text-center flex items-center justify-center gap-2 shadow">
+                    <i data-lucide="map-pinned" class="w-4 h-4 text-brand-sky"></i> <span x-text="t('btn_consult_wa')"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 w-full">
+
+        <!-- VIEW: HOME -->
+        <div x-show="currentView === 'home'" x-cloak class="space-y-12 lg:space-y-16 pb-16">
+            <!-- Hero Section -->
+            <section class="relative pt-6 lg:pt-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+                <div class="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+                    <div class="lg:col-span-7 space-y-6">
+                        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand-lightSky text-brand-teal text-xs font-bold tracking-wide uppercase">
+                            <i data-lucide="sparkles" class="w-3.5 h-3.5"></i> PT. HAPPY TOUR AND TRAVEL - Official Travel Agent
+                        </div>
+                        <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-brand-text tracking-tight leading-[1.15]">
+                            <span x-text="t('hero_title1')"></span> <br><span class="text-brand-teal" x-text="t('hero_title2')"></span>
+                        </h1>
+                        <p class="text-base sm:text-lg text-brand-muted max-w-2xl leading-relaxed" x-text="t('hero_subtitle')"></p>
+                        <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-2">
+                            <button @click="navigate('packages')" class="bg-brand-teal hover:bg-brand-deep text-white px-7 py-3.5 rounded-xl font-bold text-base shadow-lg hover:shadow-xl transition flex items-center justify-center gap-2">
+                                <span x-text="t('btn_explore')"></span> <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                            </button>
+                            <button @click="openCustomTripModal()" class="bg-white hover:bg-slate-50 border-2 border-slate-200 text-brand-text px-7 py-3.5 rounded-xl font-bold text-base transition flex items-center justify-center gap-2" x-text="t('btn_plan_trip')">
+                            </button>
+                        </div>
+                    </div>
+                    <div class="lg:col-span-5 relative mt-4 lg:mt-0">
+                        <div class="relative mx-auto max-w-md lg:max-w-none">
+                            <img :src="getHeroPhoto()" alt="Batam Barelang Bridge" class="rounded-3xl shadow-2xl object-cover h-[350px] sm:h-[420px] w-full" onerror="this.src='https://placehold.co/600x800/0F766E/FFFFFF?text=Happy+Tour'">
+                            <div class="absolute -bottom-4 sm:-bottom-6 left-4 sm:-left-6 right-4 sm:right-auto glass-panel border border-white/60 p-4 rounded-2xl shadow-xl sm:max-w-xs flex items-center gap-4">
+                                <div class="w-12 h-12 bg-emerald-100 text-emerald-700 rounded-xl flex items-center justify-center shrink-0">
+                                    <i data-lucide="shield-check" class="w-6 h-6"></i>
+                                </div>
+                                <div>
+                                    <div class="text-xs text-brand-muted font-medium" x-text="t('trusted_agent')"></div>
+                                    <div class="text-sm font-bold text-brand-text">PT. Happy Tour and Travel</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Interactive Trip Finder -->
+            <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="bg-white border border-slate-200 rounded-2xl shadow-xl p-6 lg:p-8">
+                    <h2 class="text-xl font-bold text-brand-text mb-6 flex items-center gap-2">
+                        <i data-lucide="search" class="w-5 h-5 text-brand-teal"></i> <span x-text="t('finder_heading')"></span>
+                    </h2>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+                        <div>
+                            <label class="block text-xs font-semibold text-brand-muted uppercase mb-2" x-text="t('lbl_destination')"></label>
+                            <select x-model="finder.destination" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brand-teal">
+                                <option value="" x-text="t('opt_all_destinations')"></option>
+                                <template x-for="d in destinations" :key="d.id">
+                                    <option :value="d.name" x-text="d.name"></option>
+                                </template>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-brand-muted uppercase mb-2" x-text="t('lbl_category')"></label>
+                            <select x-model="finder.category" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brand-teal">
+                                <option value="" x-text="t('opt_all_categories')"></option>
+                                <option value="Explore Package">Explore Package</option>
+                                <option value="Multi-Day Trip">Multi-Day Trip (3D2N)</option>
+                                <option value="Honeymoon">Honeymoon Package</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-brand-muted uppercase mb-2" x-text="t('lbl_travel_date')"></label>
+                            <input type="date" x-model="finder.date" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brand-teal">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-brand-muted uppercase mb-2" x-text="t('lbl_travelers')"></label>
+                            <input type="number" min="1" x-model="finder.travelers" placeholder="1" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brand-teal">
+                        </div>
+                        <div class="flex items-end">
+                            <button @click="executeFinder()" class="w-full bg-brand-teal hover:bg-brand-deep text-white font-bold py-3 rounded-xl shadow transition flex items-center justify-center gap-2">
+                                <i data-lucide="sliders-horizontal" class="w-4 h-4"></i> <span x-text="t('btn_search_pkg')"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Featured Destinations (Clickable Cards) -->
+            <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-8">
+                    <div>
+                        <span class="text-brand-teal font-extrabold text-xs tracking-widest uppercase" x-text="t('tag_popular_dest')"></span>
+                        <h2 class="text-2xl sm:text-3xl font-extrabold text-brand-text mt-1" x-text="t('heading_popular_dest')"></h2>
+                    </div>
+                    <button @click="navigate('destinations')" class="mt-3 md:mt-0 text-brand-teal font-bold hover:underline inline-flex items-center gap-1 text-sm">
+                        <span x-text="t('link_all_dest')"></span> <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </button>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <template x-for="dest in destinations.slice(0, 4)" :key="dest.id">
+                        <div @click="selectDestination(dest.name)" class="group cursor-pointer relative rounded-2xl overflow-hidden shadow-md h-64 bg-slate-100 transform hover:-translate-y-1 transition duration-300">
+                            <img :src="dest.image" :alt="dest.name" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" onerror="this.src='https://placehold.co/400x500/0F766E/FFFFFF?text=Destinasi'">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                            <div class="absolute bottom-4 left-4 right-4 text-white">
+                                <span class="text-xs text-brand-sky font-semibold uppercase" x-text="dest.country"></span>
+                                <h3 class="text-xl font-bold group-hover:text-brand-sky transition" x-text="dest.name"></h3>
+                                <p class="text-xs text-slate-200 mt-1 line-clamp-1" x-text="getDestDesc(dest)"></p>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </section>
+
+            <!-- Featured Packages -->
+            <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-8">
+                    <div>
+                        <span class="text-brand-teal font-extrabold text-xs tracking-widest uppercase" x-text="t('tag_official_flyers')"></span>
+                        <h2 class="text-2xl sm:text-3xl font-extrabold text-brand-text mt-1" x-text="t('heading_featured_packages')"></h2>
+                    </div>
+                    <button @click="navigate('packages')" class="mt-3 md:mt-0 text-brand-teal font-bold hover:underline inline-flex items-center gap-1 text-sm">
+                        <span x-text="t('link_all_packages')"></span> <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </button>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <template x-for="pkg in packages.slice(0, 3)" :key="pkg.id">
+                        <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-xl transition flex flex-col group">
+                            <div class="relative h-48 overflow-hidden bg-slate-100 cursor-pointer" @click="openPackageDetail(pkg)">
+                                <img :src="pkg.image" :alt="getPkgTitle(pkg)" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="this.src='https://placehold.co/600x400/0F766E/FFFFFF?text=Paket+Wisata'">
+                                <div class="absolute top-3 left-3 bg-white/90 backdrop-blur-md px-3 py-1 rounded-full text-xs font-bold text-brand-teal" x-text="pkg.category"></div>
+                                <template x-if="pkg.isPromo">
+                                    <div class="absolute top-3 right-3 bg-rose-500 text-white px-3 py-1 rounded-full text-xs font-extrabold uppercase" x-text="pkg.badgeText || 'PROMO'"></div>
+                                </template>
+                            </div>
+                            <div class="p-6 flex-1 flex flex-col justify-between">
+                                <div>
+                                    <div class="text-xs text-brand-muted font-medium mb-1" x-text="pkg.destination + ' • ' + pkg.duration"></div>
+                                    <h3 class="text-xl font-bold text-brand-text mb-3 hover:text-brand-teal transition cursor-pointer" @click="openPackageDetail(pkg)" x-text="getPkgTitle(pkg)"></h3>
+                                    <p class="text-sm text-brand-muted line-clamp-2 mb-4" x-text="getPkgDesc(pkg)"></p>
+                                </div>
+                                <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+                                    <div>
+                                        <span class="text-[10px] text-brand-muted uppercase font-bold block" x-text="t('lbl_starting_from')"></span>
+                                        <span class="text-lg font-extrabold text-brand-teal" x-text="formatPricePerPerson(pkg)"></span>
+                                    </div>
+                                    <div class="flex items-center gap-2">
+                                        <button @click="openPackageDetail(pkg)" class="px-3 py-2 text-xs font-bold border border-slate-200 rounded-lg text-brand-text hover:bg-slate-50" x-text="t('btn_detail')"></button>
+                                        <button @click="openWhatsAppPackage(pkg)" class="p-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg shadow" :title="t('btn_enquire_wa')">
+                                            <i data-lucide="message-square" class="w-4 h-4"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </section>
+
+            <!-- Why Choose Us -->
+            <section class="bg-brand-deep text-white py-16">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center max-w-2xl mx-auto mb-12">
+                        <span class="text-brand-sky font-extrabold text-xs tracking-widest uppercase" x-text="t('why_us_tag')"></span>
+                        <h2 class="text-2xl sm:text-3xl font-extrabold mt-1" x-text="t('why_us_title')"></h2>
+                    </div>
+                    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                        <div class="bg-white/5 border border-white/10 p-6 rounded-2xl">
+                            <i data-lucide="calendar-check" class="w-10 h-10 text-brand-sky mb-4"></i>
+                            <h3 class="text-lg font-bold mb-2" x-text="t('why_1_title')"></h3>
+                            <p class="text-sm text-slate-300" x-text="t('why_1_desc')"></p>
+                        </div>
+                        <div class="bg-white/5 border border-white/10 p-6 rounded-2xl">
+                            <i data-lucide="percent" class="w-10 h-10 text-brand-sky mb-4"></i>
+                            <h3 class="text-lg font-bold mb-2" x-text="t('why_2_title')"></h3>
+                            <p class="text-sm text-slate-300" x-text="t('why_2_desc')"></p>
+                        </div>
+                        <div class="bg-white/5 border border-white/10 p-6 rounded-2xl">
+                            <i data-lucide="package-check" class="w-10 h-10 text-brand-sky mb-4"></i>
+                            <h3 class="text-lg font-bold mb-2" x-text="t('why_3_title')"></h3>
+                            <p class="text-sm text-slate-300" x-text="t('why_3_desc')"></p>
+                        </div>
+                        <div class="bg-white/5 border border-white/10 p-6 rounded-2xl">
+                            <i data-lucide="user-check" class="w-10 h-10 text-brand-sky mb-4"></i>
+                            <h3 class="text-lg font-bold mb-2" x-text="t('why_4_title')"></h3>
+                            <p class="text-sm text-slate-300" x-text="t('why_4_desc')"></p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- VIEW: TOUR PACKAGES -->
+        <div x-show="currentView === 'packages'" x-cloak class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
+            <div>
+                <span class="text-brand-teal font-extrabold text-xs tracking-widest uppercase" x-text="t('pkg_catalog_tag')"></span>
+                <h1 class="text-3xl font-extrabold text-brand-text mt-1" x-text="t('pkg_catalog_title')"></h1>
+            </div>
+
+            <!-- Filter Bar -->
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <input type="text" x-model="filter.search" :placeholder="t('ph_search_package')" class="bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-brand-teal">
+                    <select x-model="filter.category" class="bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-brand-teal">
+                        <option value="" x-text="t('opt_all_categories')"></option>
+                        <option value="Explore Package">Explore Package</option>
+                        <option value="Multi-Day Trip">Multi-Day Trip (3D2N)</option>
+                        <option value="Honeymoon">Honeymoon Package</option>
+                    </select>
+                    <select x-model="filter.destination" class="bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-brand-teal">
+                        <option value="" x-text="t('opt_all_destinations')"></option>
+                        <template x-for="d in destinations" :key="d.id">
+                            <option :value="d.name" x-text="d.name"></option>
+                        </template>
+                    </select>
+                    <select x-model="filter.sort" class="bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-brand-teal">
+                        <option value="recommended" x-text="t('sort_recommended')"></option>
+                        <option value="price-asc" x-text="t('sort_price_low')"></option>
+                        <option value="price-desc" x-text="t('sort_price_high')"></option>
+                    </select>
+                </div>
+                <div class="flex items-center justify-between pt-2 border-t border-slate-100 text-xs">
+                    <span class="text-brand-muted" x-text="filteredPackages.length + ' ' + t('packages_found')"></span>
+                    <button @click="resetFilters()" class="text-brand-teal font-bold hover:underline" x-text="t('btn_reset_filters')"></button>
+                </div>
+            </div>
+
+            <!-- Package Cards Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <template x-for="pkg in filteredPackages" :key="pkg.id">
+                    <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-xl transition flex flex-col justify-between">
+                        <div>
+                            <div class="relative h-48 overflow-hidden bg-slate-100 cursor-pointer" @click="openPackageDetail(pkg)">
+                                <img :src="pkg.image" :alt="getPkgTitle(pkg)" class="w-full h-full object-cover hover:scale-105 transition duration-500" onerror="this.src='https://placehold.co/600x400/0F766E/FFFFFF?text=Paket+Wisata'">
+                                <div class="absolute top-3 left-3 bg-white/90 backdrop-blur-md px-3 py-1 rounded-full text-xs font-bold text-brand-teal" x-text="pkg.category"></div>
+                                <template x-if="pkg.badgeText">
+                                    <div class="absolute top-3 right-3 bg-amber-500 text-white px-2.5 py-1 rounded-full text-[10px] font-extrabold uppercase" x-text="pkg.badgeText"></div>
+                                </template>
+                            </div>
+                            <div class="p-6">
+                                <div class="text-xs text-brand-muted font-medium mb-1" x-text="pkg.destination + ' • ' + pkg.duration"></div>
+                                <h3 class="text-xl font-bold text-brand-text mb-3 cursor-pointer hover:text-brand-teal" @click="openPackageDetail(pkg)" x-text="getPkgTitle(pkg)"></h3>
+                                <p class="text-sm text-brand-muted line-clamp-2" x-text="getPkgDesc(pkg)"></p>
+                            </div>
+                        </div>
+                        <div class="p-6 pt-0 border-t border-slate-100 mt-4 flex items-center justify-between">
+                            <div>
+                                <span class="text-[10px] text-brand-muted uppercase font-bold block" x-text="t('lbl_price')"></span>
+                                <span class="text-lg font-extrabold text-brand-teal" x-text="formatPricePerPerson(pkg)"></span>
+                            </div>
+                            <button @click="openPackageDetail(pkg)" class="bg-brand-teal text-white px-4 py-2 rounded-xl text-xs font-bold hover:bg-brand-deep transition" x-text="t('btn_pkg_detail')"></button>
+                        </div>
+                    </div>
+                </template>
+            </div>
+            <div x-show="filteredPackages.length === 0" class="text-center py-16 bg-white rounded-2xl border border-slate-200">
+                <i data-lucide="package-search" class="w-12 h-12 text-slate-400 mx-auto mb-3"></i>
+                <h3 class="text-lg font-bold text-brand-text" x-text="t('no_packages_found')"></h3>
+                <p class="text-sm text-brand-muted mt-1" x-text="t('no_packages_sub')"></p>
+            </div>
+        </div>
+
+        <!-- VIEW: DESTINATIONS -->
+        <div x-show="currentView === 'destinations'" x-cloak class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
+            <div>
+                <span class="text-brand-teal font-extrabold text-xs tracking-widest uppercase" x-text="t('nav_destinations')"></span>
+                <h1 class="text-3xl font-extrabold text-brand-text mt-1" x-text="t('dest_title')"></h1>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <template x-for="dest in destinations" :key="dest.id">
+                    <div @click="selectDestination(dest.name)" class="group cursor-pointer bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-xl transition duration-300 flex flex-col justify-between">
+                        <div>
+                            <div class="relative overflow-hidden h-52">
+                                <img :src="dest.image" :alt="dest.name" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="this.src='https://placehold.co/600x400/0F766E/FFFFFF?text=Destinasi'">
+                                <div class="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition"></div>
+                            </div>
+                            <div class="p-6 space-y-2">
+                                <span class="text-xs font-bold text-brand-teal uppercase tracking-wider" x-text="dest.country"></span>
+                                <h3 class="text-xl font-bold text-brand-text group-hover:text-brand-teal transition" x-text="dest.name"></h3>
+                                <p class="text-sm text-brand-muted" x-text="getDestDesc(dest)"></p>
+                            </div>
+                        </div>
+                        <div class="p-6 pt-0">
+                            <button class="w-full bg-slate-50 group-hover:bg-brand-teal group-hover:text-white text-slate-700 py-2.5 rounded-xl font-bold text-xs border border-slate-200 transition" x-text="t('btn_view_dest_pkg')"></button>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </div>
+
+        <!-- VIEW: SERVICES -->
+        <div x-show="currentView === 'services'" x-cloak class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
+            <div>
+                <span class="text-brand-teal font-extrabold text-xs tracking-widest uppercase" x-text="t('nav_services')"></span>
+                <h1 class="text-3xl font-extrabold text-brand-text mt-1" x-text="t('services_title')"></h1>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <template x-for="s in services" :key="s.id">
+                    <div class="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm space-y-4 flex flex-col justify-between">
+                        <div class="space-y-4">
+                            <div class="w-12 h-12 rounded-xl bg-teal-50 text-brand-teal flex items-center justify-center">
+                                <i :data-lucide="s.icon || 'check-circle'" class="w-6 h-6"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-brand-text" x-text="getServiceTitle(s)"></h3>
+                            <p class="text-sm text-brand-muted leading-relaxed" x-text="getServiceDesc(s)"></p>
+                        </div>
+                        <button @click="openServiceWA(s.serviceKey)" class="pt-4 text-brand-teal font-bold text-sm hover:underline inline-flex items-center gap-1">
+                            <span x-text="t('btn_consult_service')"></span> <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                </template>
+            </div>
+        </div>
+
+        <!-- VIEW: PROMOS -->
+        <div x-show="currentView === 'promos'" x-cloak class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
+            <div>
+                <span class="text-brand-teal font-extrabold text-xs tracking-widest uppercase" x-text="t('nav_promos')"></span>
+                <h1 class="text-3xl font-extrabold text-brand-text mt-1" x-text="t('promos_title')"></h1>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <template x-for="p in promos" :key="p.id">
+                    <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm flex flex-col sm:flex-row">
+                        <img :src="p.image" :alt="getPromoTitle(p)" class="w-full sm:w-52 h-48 sm:h-auto object-cover" onerror="this.src='https://placehold.co/400x400/0F766E/FFFFFF?text=Promo'">
+                        <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
+                            <div>
+                                <span class="inline-block px-2.5 py-1 bg-rose-100 text-rose-700 font-extrabold text-[10px] rounded-md uppercase mb-2" x-text="p.period"></span>
+                                <h3 class="text-lg font-bold text-brand-text" x-text="getPromoTitle(p)"></h3>
+                                <p class="text-sm text-brand-muted mt-1" x-text="getPromoDesc(p)"></p>
+                            </div>
+                            
+                            <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 space-y-2">
+                                <div class="flex items-center justify-between text-xs">
+                                    <span class="font-bold text-slate-700" x-text="t('lbl_travelers')"></span>
+                                    <div class="flex items-center gap-2">
+                                        <button @click="changePromoTravelers(p.id, -1)" class="w-7 h-7 bg-white border border-slate-300 rounded-md font-bold text-brand-text hover:bg-slate-100">-</button>
+                                        <span class="font-bold text-sm text-brand-teal px-1" x-text="promoState[p.id]?.travelers || p.minTravelers || 1"></span>
+                                        <button @click="changePromoTravelers(p.id, 1)" class="w-7 h-7 bg-white border border-slate-300 rounded-md font-bold text-brand-text hover:bg-slate-100">+</button>
+                                    </div>
+                                </div>
+
+                                <template x-if="p.minTravelers && (promoState[p.id]?.travelers < p.minTravelers)">
+                                    <p class="text-[11px] text-amber-700 bg-amber-50 p-1.5 rounded border border-amber-200">
+                                        ⚠️ <span x-text="t('promo_min_pax_notice').replace('{min}', p.minTravelers)"></span>
+                                    </p>
+                                </template>
+
+                                <div class="flex justify-between items-center text-xs pt-1 border-t border-slate-200/60">
+                                    <span class="text-slate-500" x-text="t('lbl_total_price')"></span>
+                                    <span class="font-extrabold text-brand-teal text-base" x-text="calculatePromoTotal(p)"></span>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center justify-between pt-2">
+                                <div>
+                                    <span class="text-[10px] text-brand-muted block uppercase font-bold" x-text="t('lbl_promo_price_pax')"></span>
+                                    <span class="text-sm font-extrabold text-rose-600" x-text="formatPromoPricePerPerson(p)"></span>
+                                </div>
+                                <button @click="claimPromoWA(p)" class="bg-brand-teal hover:bg-brand-deep text-white px-4 py-2 rounded-xl text-xs font-bold shadow transition flex items-center gap-1.5">
+                                    <i data-lucide="message-square" class="w-3.5 h-3.5"></i> <span x-text="t('btn_claim_promo')"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </div>
+
+        <!-- VIEW: ABOUT US -->
+        <div x-show="currentView === 'about'" x-cloak class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-12">
+            <div class="max-w-3xl">
+                <span class="text-brand-teal font-extrabold text-xs tracking-widest uppercase" x-text="t('nav_about')"></span>
+                <h1 class="text-3xl sm:text-4xl font-extrabold text-brand-text mt-1">PT. Happy Tour and Travel</h1>
+                <p class="text-base sm:text-lg text-brand-muted mt-3 leading-relaxed" x-text="t('about_intro')"></p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm space-y-3">
+                    <div class="w-10 h-10 rounded-xl bg-teal-50 text-brand-teal flex items-center justify-center">
+                        <i data-lucide="book-open" class="w-5 h-5"></i>
+                    </div>
+                    <h2 class="text-xl font-bold text-brand-text" x-text="t('about_story_title')"></h2>
+                    <p class="text-sm text-brand-muted leading-relaxed" x-text="t('about_story_desc')"></p>
+                </div>
+
+                <div class="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm space-y-3">
+                    <div class="w-10 h-10 rounded-xl bg-teal-50 text-brand-teal flex items-center justify-center">
+                        <i data-lucide="users" class="w-5 h-5"></i>
+                    </div>
+                    <h2 class="text-xl font-bold text-brand-text" x-text="t('about_who_title')"></h2>
+                    <p class="text-sm text-brand-muted leading-relaxed" x-text="t('about_who_desc')"></p>
+                </div>
+
+                <div class="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm space-y-3">
+                    <div class="w-10 h-10 rounded-xl bg-teal-50 text-brand-teal flex items-center justify-center">
+                        <i data-lucide="target" class="w-5 h-5"></i>
+                    </div>
+                    <h2 class="text-xl font-bold text-brand-text" x-text="t('about_mission_title')"></h2>
+                    <p class="text-sm text-brand-muted leading-relaxed" x-text="t('about_mission_desc')"></p>
+                </div>
+
+                <div class="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm space-y-3">
+                    <div class="w-10 h-10 rounded-xl bg-teal-50 text-brand-teal flex items-center justify-center">
+                        <i data-lucide="compass" class="w-5 h-5"></i>
+                    </div>
+                    <h2 class="text-xl font-bold text-brand-text" x-text="t('about_vision_title')"></h2>
+                    <p class="text-sm text-brand-muted leading-relaxed" x-text="t('about_vision_desc')"></p>
+                </div>
+            </div>
+
+            <div class="bg-slate-900 text-white p-8 sm:p-10 rounded-3xl space-y-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-xl font-bold text-brand-sky mb-3" x-text="t('about_core_services')"></h3>
+                        <ul class="space-y-2 text-sm text-slate-300">
+                            <li class="flex items-center gap-2"><i data-lucide="ship" class="w-4 h-4 text-brand-sky"></i> <span x-text="t('about_core_1')"></span></li>
+                            <li class="flex items-center gap-2"><i data-lucide="user-check" class="w-4 h-4 text-brand-sky"></i> <span x-text="t('about_core_2')"></span></li>
+                            <li class="flex items-center gap-2"><i data-lucide="users" class="w-4 h-4 text-brand-sky"></i> <span x-text="t('about_core_3')"></span></li>
+                            <li class="flex items-center gap-2"><i data-lucide="heart" class="w-4 h-4 text-brand-sky"></i> <span x-text="t('about_core_4')"></span></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-brand-sky mb-3" x-text="t('about_transparency')"></h3>
+                        <p class="text-sm text-slate-300 leading-relaxed" x-text="t('about_transparency_desc')"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- VIEW: GALLERY -->
+        <div x-show="currentView === 'gallery'" x-cloak class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
+            <div>
+                <span class="text-brand-teal font-extrabold text-xs tracking-widest uppercase" x-text="t('nav_gallery')"></span>
+                <h1 class="text-3xl font-extrabold text-brand-text mt-1" x-text="t('gallery_title')"></h1>
+            </div>
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+                <template x-for="(g, idx) in gallery" :key="idx">
+                    <div @click="activeLightbox = g" class="group cursor-pointer relative rounded-xl overflow-hidden h-60 bg-slate-100 shadow-sm hover:shadow-md transition">
+                        <img :src="g.url" :alt="g.caption" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" onerror="this.src='https://placehold.co/400x400/0F766E/FFFFFF?text=Galeri'">
+                        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-end p-4 text-white text-xs font-bold" x-text="g.caption"></div>
+                    </div>
+                </template>
+            </div>
+        </div>
+
+        <!-- VIEW: ARTICLES -->
+        <div x-show="currentView === 'articles'" x-cloak class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
+            <div>
+                <span class="text-brand-teal font-extrabold text-xs tracking-widest uppercase" x-text="t('nav_articles')"></span>
+                <h1 class="text-3xl font-extrabold text-brand-text mt-1" x-text="t('articles_title')"></h1>
+            </div>
+
+            <!-- List View -->
+            <div x-show="!selectedArticle" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <template x-for="art in articles" :key="art.id">
+                    <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm flex flex-col justify-between group">
+                        <div>
+                            <div class="relative overflow-hidden h-48 cursor-pointer" @click="openArticleDetail(art)">
+                                <img :src="art.image" :alt="getArticleTitle(art)" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="this.src='https://placehold.co/600x400/0F766E/FFFFFF?text=Artikel'">
+                            </div>
+                            <div class="p-6 space-y-2">
+                                <span class="text-xs text-brand-teal font-bold" x-text="art.date"></span>
+                                <h3 class="text-lg font-bold text-brand-text hover:text-brand-teal cursor-pointer" @click="openArticleDetail(art)" x-text="getArticleTitle(art)"></h3>
+                                <p class="text-sm text-brand-muted line-clamp-3" x-text="getArticleSummary(art)"></p>
+                            </div>
+                        </div>
+                        <div class="p-6 pt-0">
+                            <button @click="openArticleDetail(art)" class="text-brand-teal font-bold text-sm hover:underline inline-flex items-center gap-1">
+                                <span x-text="t('btn_read_more')"></span> <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                            </button>
+                        </div>
+                    </div>
+                </template>
+            </div>
+
+            <!-- Article Detail View -->
+            <div x-show="selectedArticle" class="bg-white p-6 sm:p-10 rounded-2xl border border-slate-200 shadow-sm max-w-4xl mx-auto space-y-6">
+                <button @click="selectedArticle = null" class="text-xs font-bold text-brand-teal hover:underline flex items-center gap-1 mb-2">
+                    <i data-lucide="arrow-left" class="w-4 h-4"></i> <span x-text="t('btn_back_articles')"></span>
+                </button>
+                <div class="space-y-2">
+                    <span class="text-xs text-brand-teal font-bold" x-text="selectedArticle?.date"></span>
+                    <h1 class="text-2xl sm:text-3xl font-extrabold text-brand-text" x-text="getArticleTitle(selectedArticle)"></h1>
+                </div>
+                <img :src="selectedArticle?.image" :alt="getArticleTitle(selectedArticle)" class="w-full h-80 object-cover rounded-xl shadow-inner" onerror="this.src='https://placehold.co/800x400/0F766E/FFFFFF?text=Artikel'">
+                <div class="prose max-w-none text-slate-700 leading-relaxed text-sm sm:text-base space-y-4" x-html="getArticleContent(selectedArticle)"></div>
+                
+                <div class="pt-6 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <span class="text-xs text-brand-muted font-medium" x-text="t('article_question_prompt')"></span>
+                    <button @click="openWhatsApp('consultation')" class="bg-brand-teal text-white px-5 py-2.5 rounded-xl font-bold text-xs shadow flex items-center gap-2">
+                        <i data-lucide="message-square" class="w-4 h-4"></i> <span x-text="t('btn_consult_wa')"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- VIEW: CONTACT US -->
+        <div x-show="currentView === 'contact'" x-cloak class="min-h-full bg-gradient-to-br from-slate-50 via-teal-50/20 to-slate-100 py-10">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+                <div>
+                    <span class="text-brand-teal font-extrabold text-xs tracking-widest uppercase" x-text="t('nav_contact')"></span>
+                    <h1 class="text-3xl font-extrabold text-brand-text mt-1" x-text="t('contact_title')"></h1>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                    <!-- Contact Info Panel -->
+                    <div class="lg:col-span-5 bg-white/90 backdrop-blur-md p-8 rounded-2xl border border-slate-200/80 shadow-md space-y-6">
+                        <h2 class="text-xl font-bold text-brand-text" x-text="t('contact_info_heading')"></h2>
+                        <div class="space-y-4 text-sm">
+                            <div class="flex items-start gap-3">
+                                <div class="p-2.5 bg-teal-50 text-brand-teal rounded-lg shrink-0">
+                                    <i data-lucide="phone-call" class="w-5 h-5"></i>
+                                </div>
+                                <div>
+                                    <span class="text-xs text-brand-muted block font-semibold">WhatsApp & Phone Hotline</span>
+                                    <a href="https://wa.me/6285355748039" target="_blank" class="font-bold text-brand-text hover:text-brand-teal text-base">+62-853-5574-8039</a>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="p-2.5 bg-teal-50 text-brand-teal rounded-lg shrink-0">
+                                    <i data-lucide="globe" class="w-5 h-5"></i>
+                                </div>
+                                <div>
+                                    <span class="text-xs text-brand-muted block font-semibold">Official Website</span>
+                                    <span class="font-bold text-brand-text">www.happytourandtravel.com</span>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="p-2.5 bg-teal-50 text-brand-teal rounded-lg shrink-0">
+                                    <i data-lucide="map-pin" class="w-5 h-5"></i>
+                                </div>
+                                <div>
+                                    <span class="text-xs text-brand-muted block font-semibold">Main Office Address</span>
+                                    <span class="font-bold text-brand-text">Batam City, Kepulauan Riau, Indonesia</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Example Format Guidance Box -->
+                        <div class="pt-4 border-t border-slate-100 space-y-3">
+                            <h3 class="text-xs font-extrabold text-brand-teal uppercase tracking-wider" x-text="t('contact_example_title')"></h3>
+                            <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200 text-xs space-y-2">
+                                <span class="font-bold text-slate-800 block" x-text="t('contact_example_label')"></span>
+                                <p class="text-slate-600 italic leading-relaxed" x-text="t('contact_example_quote')"></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Interactive Message Preparation Form -->
+                    <div class="lg:col-span-7 bg-white/90 backdrop-blur-md p-8 rounded-2xl border border-slate-200/80 shadow-md space-y-4">
+                        <h2 class="text-xl font-bold text-brand-text mb-2" x-text="t('contact_form_heading')"></h2>
+                        <form @submit.prevent="sendDirectContactWA()" class="space-y-4">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-xs font-bold text-brand-muted mb-1" x-text="t('lbl_full_name')"></label>
+                                    <input type="text" x-model="contactForm.name" required placeholder="John Doe" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-brand-teal">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-brand-muted mb-1" x-text="t('lbl_destination')"></label>
+                                    <select x-model="contactForm.destination" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-brand-teal">
+                                        <option value="Batam">Batam</option>
+                                        <option value="Bintan">Bintan</option>
+                                        <option value="Malaysia">Malaysia</option>
+                                        <option value="Singapore">Singapore</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-xs font-bold text-brand-muted mb-1" x-text="t('lbl_travel_date')"></label>
+                                    <input type="date" x-model="contactForm.date" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-brand-teal">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-brand-muted mb-1" x-text="t('lbl_travelers')"></label>
+                                    <input type="number" min="1" x-model="contactForm.travelers" placeholder="2" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-brand-teal">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-bold text-brand-muted mb-1" x-text="t('lbl_message')"></label>
+                                <textarea x-model="contactForm.message" rows="4" :placeholder="t('ph_contact_msg')" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-brand-teal"></textarea>
+                            </div>
+
+                            <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3.5 rounded-xl shadow transition flex items-center justify-center gap-2">
+                                <i data-lucide="message-square" class="w-4 h-4"></i> <span x-text="t('btn_send_inquiry_wa')"></span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- VIEW: ADMIN PANEL (2 Distinct Management Sections) -->
+        <div x-show="currentView === 'admin'" x-cloak class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-10">
+            <div class="border-b border-slate-200 pb-4">
+                <span class="text-xs bg-amber-100 text-amber-800 font-extrabold px-2.5 py-1 rounded-md">ADMIN MANAGEMENT PANEL</span>
+                <h1 class="text-2xl font-extrabold text-brand-text mt-1">Pengelolaan Website & Konten</h1>
+                <p class="text-xs text-brand-muted mt-0.5">*Perubahan data disimpan secara persisten di LocalStorage browser.</p>
+            </div>
+
+            <!-- SECTION A: Edit Package Destinasi -->
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden space-y-4 p-6">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-4">
+                    <div>
+                        <h2 class="text-lg font-bold text-brand-text flex items-center gap-2">
+                            <i data-lucide="package" class="w-5 h-5 text-brand-teal"></i>
+                            A. Edit Package Destinasi
+                        </h2>
+                        <p class="text-xs text-brand-muted">Kelola paket wisata, nama paket, deskripsi, harga per orang, dan foto paket.</p>
+                    </div>
+                    <button @click="openAddPackageModal()" class="bg-brand-teal hover:bg-brand-deep text-white px-4 py-2.5 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 shadow">
+                        <i data-lucide="plus" class="w-4 h-4"></i> Tambah Paket Wisata
+                    </button>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-sm">
+                        <thead class="bg-slate-50 text-slate-500 font-semibold text-xs border-b border-slate-100">
+                            <tr>
+                                <th class="p-4">Foto / Judul Paket</th>
+                                <th class="p-4">Destinasi</th>
+                                <th class="p-4">Mata Uang Dasar</th>
+                                <th class="p-4">Harga Dasar / Pax</th>
+                                <th class="p-4 text-right">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100">
+                            <template x-for="pkg in packages" :key="pkg.id">
+                                <tr>
+                                    <td class="p-4 flex items-center gap-3">
+                                        <img :src="pkg.image" class="w-12 h-12 object-cover rounded-lg shrink-0 border" onerror="this.src='https://placehold.co/100x100'">
+                                        <div>
+                                            <div class="font-bold text-brand-text" x-text="pkg.title"></div>
+                                            <span class="text-[10px] text-brand-teal font-semibold" x-text="pkg.category"></span>
+                                        </div>
+                                    </td>
+                                    <td class="p-4 text-brand-muted text-xs" x-text="pkg.destination"></td>
+                                    <td class="p-4 font-bold text-xs" x-text="pkg.currency || 'IDR'"></td>
+                                    <td class="p-4">
+                                        <input type="number" min="0" x-model.number="pkg.price" @change="updatePackagePrice(pkg)" class="w-32 bg-slate-50 border border-slate-300 rounded px-2 py-1 text-xs font-bold text-brand-teal">
+                                    </td>
+                                    <td class="p-4 text-right space-x-1">
+                                        <button @click="openEditPackageModal(pkg)" class="px-2.5 py-1 bg-teal-50 text-brand-teal rounded text-xs font-bold hover:bg-teal-100">Edit Foto & Detail</button>
+                                        <button @click="deletePackage(pkg.id)" class="px-2.5 py-1 bg-rose-50 text-rose-600 rounded text-xs font-bold hover:bg-rose-100">Hapus</button>
+                                    </td>
+                                </tr>
+                            </template>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- SECTION B: Edit Halaman Biasa (Dedicated Non-Package Image Management) -->
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden p-6 space-y-6">
+                <div class="border-b border-slate-100 pb-4">
+                    <h2 class="text-lg font-bold text-brand-text flex items-center gap-2">
+                        <i data-lucide="image" class="w-5 h-5 text-brand-teal"></i>
+                        B. Edit Halaman Biasa (Foto Non-Package Website)
+                    </h2>
+                    <p class="text-xs text-brand-muted">Ganti foto banner, hero header, galeri, dan aset gambar umum halaman publik secara independen.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Manage Hero Banner Photo -->
+                    <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-extrabold text-brand-teal uppercase tracking-wider">1. Hero Banner Utama (Beranda)</span>
+                            <span class="text-[10px] bg-teal-100 text-teal-800 font-bold px-2 py-0.5 rounded">Halaman Publik</span>
+                        </div>
+                        <div class="relative h-44 rounded-xl overflow-hidden border bg-white">
+                            <img :src="heroPhotoPreview || pagePhotos.heroBanner" class="w-full h-full object-cover">
+                        </div>
+                        <div class="space-y-2">
+                            <label class="block text-xs font-bold text-brand-muted">Ganti Foto (URL atau Upload File):</label>
+                            <input type="text" x-model="heroPhotoInput" placeholder="Masukkan URL Foto baru..." class="w-full bg-white border border-slate-300 rounded-xl p-2 text-xs focus:outline-none focus:border-brand-teal">
+                            
+                            <div class="flex items-center gap-2">
+                                <label class="cursor-pointer bg-white border border-slate-300 text-slate-700 px-3 py-1.5 rounded-xl text-xs font-bold hover:bg-slate-100 flex items-center gap-1">
+                                    <i data-lucide="upload" class="w-3.5 h-3.5"></i> Unggah File
+                                    <input type="file" accept="image/*" class="hidden" @change="handleFileUpload($event, 'heroBanner')">
+                                </label>
+                                <button type="button" @click="previewHeroPhoto()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 px-3 py-1.5 rounded-xl text-xs font-bold">Preview</button>
+                                <button type="button" @click="saveHeroPhoto()" class="bg-brand-teal hover:bg-brand-deep text-white px-4 py-1.5 rounded-xl text-xs font-bold ml-auto shadow">Simpan Foto</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Manage Gallery Item Photos -->
+                    <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-extrabold text-brand-teal uppercase tracking-wider">2. Foto Galeri Halaman Publik</span>
+                            <span class="text-[10px] bg-teal-100 text-teal-800 font-bold px-2 py-0.5 rounded">Galeri</span>
+                        </div>
+                        <div class="space-y-3 max-h-64 overflow-y-auto pr-1">
+                            <template x-for="(g, idx) in gallery" :key="idx">
+                                <div class="flex items-center gap-3 bg-white p-2 rounded-xl border border-slate-200 text-xs">
+                                    <img :src="g.url" class="w-10 h-10 object-cover rounded-lg shrink-0" onerror="this.src='https://placehold.co/100x100'">
+                                    <div class="flex-1 min-w-0">
+                                        <div class="font-bold truncate" x-text="g.caption"></div>
+                                        <input type="text" x-model="g.url" @change="saveGalleryPhotos()" class="w-full bg-slate-50 border border-slate-200 rounded px-2 py-1 text-[11px] mt-1" placeholder="URL Foto...">
+                                    </div>
+                                    <label class="cursor-pointer p-2 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-lg shrink-0" title="Ganti File">
+                                        <i data-lucide="upload" class="w-3.5 h-3.5"></i>
+                                        <input type="file" accept="image/*" class="hidden" @change="handleGalleryFileUpload($event, idx)">
+                                    </label>
+                                </div>
+                            </template>
+                        </div>
+                        <p class="text-[11px] text-brand-muted">*Perubahan URL atau Upload foto galeri tersimpan secara otomatis.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- MODAL: Detail Paket Wisata -->
+    <div x-show="selectedPackage" x-cloak class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
+        <div @click.away="selectedPackage = null" class="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl p-6 space-y-6 relative">
+            <div class="flex justify-between items-start border-b pb-4 relative z-10">
+                <div>
+                    <span class="text-xs font-bold text-brand-teal uppercase" x-text="selectedPackage?.category"></span>
+                    <h2 class="text-2xl font-bold text-brand-text pr-8" x-text="getPkgTitle(selectedPackage)"></h2>
+                    <span class="inline-block mt-1 px-2.5 py-0.5 bg-amber-100 text-amber-800 text-xs font-bold rounded" x-text="selectedPackage?.scheduleText || t('top_daily_departures')"></span>
+                </div>
+                <button @click="selectedPackage = null" class="absolute top-0 right-0 z-50 p-2 text-slate-500 hover:text-slate-800 bg-slate-100 hover:bg-slate-200 rounded-full transition focus:outline-none" title="Tutup">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+            
+            <img :src="selectedPackage?.image" class="w-full h-64 object-cover rounded-xl shadow-inner" onerror="this.src='https://placehold.co/600x400/0F766E/FFFFFF?text=Paket'">
+            
+            <div class="space-y-4">
+                <div>
+                    <h3 class="font-bold text-sm text-brand-text" x-text="t('lbl_pkg_desc')"></h3>
+                    <p class="text-sm text-brand-muted mt-1" x-text="getPkgDesc(selectedPackage)"></p>
+                </div>
+
+                <div x-show="selectedPackage?.itineraryList && selectedPackage?.itineraryList.length > 0">
+                    <h3 class="font-bold text-sm text-brand-text" x-text="t('lbl_itinerary')"></h3>
+                    <ul class="mt-2 space-y-1 list-disc list-inside text-sm text-slate-700">
+                        <template x-for="item in selectedPackage?.itineraryList" :key="item">
+                            <li x-text="item"></li>
+                        </template>
+                    </ul>
+                </div>
+
+                <!-- Pax Controls with Auto Calculated Total -->
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-3">
+                    <h4 class="font-bold text-xs uppercase text-brand-teal tracking-wider" x-text="t('lbl_calc_pax_title')"></h4>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-[11px] font-bold uppercase text-brand-muted mb-1" x-text="t('lbl_travel_date')"></label>
+                            <input type="date" x-model="modalTravelDate" class="w-full bg-white border border-slate-200 rounded-lg p-2 text-xs">
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-bold uppercase text-brand-muted mb-1" x-text="t('lbl_travelers')"></label>
+                            <div class="flex items-center gap-2">
+                                <button type="button" @click="changeModalPax(-1)" class="px-3 py-1.5 bg-white border border-slate-300 rounded font-bold text-sm hover:bg-slate-100 transition">-</button>
+                                <input type="number" :min="selectedPackage?.minPax || 1" x-model.number="modalTravelers" @input="validateModalPax()" class="w-full bg-white border border-slate-200 rounded-lg p-2 text-xs font-bold text-center">
+                                <button type="button" @click="changeModalPax(1)" class="px-3 py-1.5 bg-white border border-slate-300 rounded font-bold text-sm hover:bg-slate-100 transition">+</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Auto Calculated Total Section -->
+                    <div class="pt-2 border-t border-slate-200 flex items-center justify-between text-xs">
+                        <div>
+                            <span class="text-brand-muted block" x-text="t('lbl_price_per_pax_sub')"></span>
+                            <span class="font-extrabold text-slate-800 text-sm" x-text="formatPricePerPerson(selectedPackage)"></span>
+                        </div>
+                        <div class="text-right">
+                            <span class="text-brand-muted block font-semibold"><span x-text="t('lbl_total_price')"></span> (<span x-text="modalTravelers || 1"></span> <span x-text="t('lbl_pax_unit')"></span>):</span>
+                            <span class="font-extrabold text-brand-teal text-lg" x-text="calculatePackageTotalFormatted(selectedPackage)"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Includes / Excludes -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+                    <div class="bg-emerald-50/80 p-4 rounded-xl border border-emerald-200">
+                        <h4 class="font-bold text-xs text-emerald-800 uppercase flex items-center gap-1 mb-2">
+                            <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-600"></i> Include (<span x-text="t('lbl_include')"></span>)
+                        </h4>
+                        <ul class="text-xs text-emerald-900 space-y-1.5">
+                            <template x-for="inc in selectedPackage?.includes" :key="inc">
+                                <li class="flex items-start gap-1.5">
+                                    <span class="text-emerald-600">•</span>
+                                    <span x-text="inc"></span>
+                                </li>
+                            </template>
+                        </ul>
+                    </div>
+
+                    <div class="bg-rose-50/80 p-4 rounded-xl border border-rose-200">
+                        <h4 class="font-bold text-xs text-rose-800 uppercase flex items-center gap-1 mb-2">
+                            <i data-lucide="x-circle" class="w-4 h-4 text-rose-600"></i> Exclude (<span x-text="t('lbl_exclude')"></span>)
+                        </h4>
+                        <ul class="text-xs text-rose-900 space-y-1.5">
+                            <template x-for="exc in selectedPackage?.excludes" :key="exc">
+                                <li class="flex items-start gap-1.5">
+                                    <span class="text-rose-600">•</span>
+                                    <span x-text="exc"></span>
+                                </li>
+                            </template>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-between pt-4 border-t">
+                    <div>
+                        <span class="text-xs text-brand-muted uppercase font-bold block" x-text="t('lbl_total_order')"></span>
+                        <span class="text-xl font-extrabold text-brand-teal" x-text="calculatePackageTotalFormatted(selectedPackage)"></span>
+                    </div>
+                    <button @click="openWhatsAppPackage(selectedPackage)" class="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-3 rounded-xl font-bold text-sm shadow flex items-center gap-2">
+                        <i data-lucide="message-square" class="w-4 h-4"></i> <span x-text="t('btn_book_wa')"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: Custom Trip Consultation -->
+    <div x-show="customTripModalOpen" x-cloak class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-lg w-full p-6 space-y-4 shadow-2xl relative">
+            <div class="flex justify-between items-center border-b pb-3">
+                <h2 class="text-xl font-bold text-brand-text" x-text="t('btn_plan_trip')"></h2>
+                <button @click="customTripModalOpen = false" class="text-slate-400 hover:text-slate-600">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+            <div class="space-y-3">
+                <div>
+                    <label class="block text-xs font-bold text-brand-muted mb-1" x-text="t('lbl_destination')"></label>
+                    <select x-model="customForm.destination" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-sm">
+                        <option value="Batam City">Batam City</option>
+                        <option value="Bintan Island">Bintan Island</option>
+                        <option value="Pulau Penyengat">Pulau Penyengat</option>
+                        <option value="Malaysia & Batam">Malaysia & Batam</option>
+                        <option value="Singapore & Batam">Singapore & Batam</option>
+                    </select>
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-bold text-brand-muted mb-1" x-text="t('lbl_travel_date')"></label>
+                        <input type="date" x-model="customForm.date" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-brand-muted mb-1" x-text="t('lbl_travelers')"></label>
+                        <input type="number" min="1" x-model="customForm.travelers" placeholder="2" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-sm">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-brand-muted mb-1" x-text="t('lbl_trip_type')"></label>
+                    <select x-model="customForm.tripType" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-sm">
+                        <option value="Persendirian / Private" x-text="t('opt_private')"></option>
+                        <option value="Berkumpulan / Group" x-text="t('opt_group')"></option>
+                        <option value="Honeymoon" x-text="t('opt_honeymoon')"></option>
+                    </select>
+                </div>
+                <button @click="submitCustomTripWA()" class="w-full bg-brand-teal text-white font-bold py-3 rounded-xl hover:bg-brand-deep transition flex items-center justify-center gap-2 mt-2">
+                    <i data-lucide="message-square" class="w-4 h-4"></i> <span x-text="t('btn_consult_wa')"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: Edit Package Admin -->
+    <div x-show="editingPackage" x-cloak class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-lg w-full p-6 space-y-4 shadow-2xl max-h-[90vh] overflow-y-auto">
+            <h2 class="text-xl font-bold text-brand-text">Edit Package Destinasi</h2>
+            <form @submit.prevent="saveEditedPackage()" class="space-y-3">
+                <div>
+                    <label class="block text-xs font-bold text-brand-muted mb-1">Judul Paket</label>
+                    <input type="text" x-model="editingPackage.title" required class="w-full bg-slate-50 border p-2.5 rounded-xl text-sm">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-brand-muted mb-1">URL Foto Paket</label>
+                    <input type="text" x-model="editingPackage.image" required class="w-full bg-slate-50 border p-2.5 rounded-xl text-sm">
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-bold text-brand-muted mb-1">Mata Uang Dasar</label>
+                        <select x-model="editingPackage.currency" class="w-full bg-slate-50 border p-2.5 rounded-xl text-sm">
+                            <option value="IDR">IDR (Rp)</option>
+                            <option value="MYR">MYR (RM)</option>
+                            <option value="SGD">SGD ($)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-brand-muted mb-1">Harga Dasar Per Orang</label>
+                        <input type="number" min="0" x-model.number="editingPackage.price" required class="w-full bg-slate-50 border p-2.5 rounded-xl text-sm">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-brand-muted mb-1">Deskripsi</label>
+                    <textarea x-model="editingPackage.description" rows="3" class="w-full bg-slate-50 border p-2.5 rounded-xl text-sm"></textarea>
+                </div>
+                <div class="flex justify-end gap-2 pt-2">
+                    <button type="button" @click="editingPackage = null" class="px-4 py-2 border rounded-xl text-xs font-bold">Batal</button>
+                    <button type="submit" class="px-4 py-2 bg-brand-teal text-white rounded-xl text-xs font-bold">Simpan Perubahan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL: Tambah Paket Wisata -->
+    <div x-show="addPackageModalOpen" x-cloak class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-lg w-full p-6 space-y-4 shadow-2xl">
+            <div class="flex justify-between items-center border-b pb-3">
+                <h2 class="text-xl font-bold text-brand-text">Tambah Paket Wisata Baru</h2>
+                <button type="button" @click="addPackageModalOpen = false" class="text-slate-400 hover:text-slate-600">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+            <form @submit.prevent="saveNewPackage()" class="space-y-3">
+                <div>
+                    <label class="block text-xs font-bold text-brand-muted mb-1">Judul Paket</label>
+                    <input type="text" x-model="newPkg.title" placeholder="e.g. Paket Tour Batam 2D1N" required class="w-full bg-slate-50 border border-slate-200 p-2.5 rounded-xl text-sm focus:outline-none focus:border-brand-teal">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-brand-muted mb-1">Destinasi</label>
+                    <input type="text" x-model="newPkg.destination" placeholder="e.g. Batam City" required class="w-full bg-slate-50 border border-slate-200 p-2.5 rounded-xl text-sm focus:outline-none focus:border-brand-teal">
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-bold text-brand-muted mb-1">Mata Uang Dasar</label>
+                        <select x-model="newPkg.currency" class="w-full bg-slate-50 border border-slate-200 p-2.5 rounded-xl text-sm focus:outline-none focus:border-brand-teal">
+                            <option value="IDR">IDR (Rp)</option>
+                            <option value="MYR">MYR (RM)</option>
+                            <option value="SGD">SGD ($)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-brand-muted mb-1">Harga Dasar Per Orang</label>
+                        <input type="number" min="0" x-model.number="newPkg.price" placeholder="350000" required class="w-full bg-slate-50 border border-slate-200 p-2.5 rounded-xl text-sm focus:outline-none focus:border-brand-teal">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-brand-muted mb-1">URL Gambar Paket</label>
+                    <input type="text" x-model="newPkg.image" placeholder="https://..." class="w-full bg-slate-50 border border-slate-200 p-2.5 rounded-xl text-sm focus:outline-none focus:border-brand-teal">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-brand-muted mb-1">Deskripsi Singkat</label>
+                    <textarea x-model="newPkg.description" placeholder="Deskripsi mengenai paket wisata..." rows="3" class="w-full bg-slate-50 border border-slate-200 p-2.5 rounded-xl text-sm focus:outline-none focus:border-brand-teal"></textarea>
+                </div>
+                <div class="flex justify-end gap-2 pt-2 border-t">
+                    <button type="button" @click="addPackageModalOpen = false" class="px-4 py-2 border border-slate-200 rounded-xl text-xs font-bold hover:bg-slate-50">Batal</button>
+                    <button type="submit" class="px-4 py-2 bg-brand-teal hover:bg-brand-deep text-white rounded-xl text-xs font-bold shadow">Simpan Paket</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- LIGHTBOX: Galeri -->
+    <div x-show="activeLightbox" x-cloak class="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4" @click="activeLightbox = null">
+        <div class="max-w-3xl w-full text-center space-y-2 relative" @click.stop>
+            <button @click="activeLightbox = null" class="absolute -top-10 right-0 text-white hover:text-slate-300">
+                <i data-lucide="x" class="w-7 h-7"></i>
+            </button>
+            <img :src="activeLightbox?.url" class="max-h-[80vh] mx-auto rounded-xl shadow-2xl">
+            <p class="text-white text-sm font-semibold" x-text="activeLightbox?.caption"></p>
+        </div>
+    </div>
+
+    <!-- Floating WhatsApp Widget -->
+    <div class="fixed bottom-6 right-6 z-40 flex flex-col items-end gap-2">
+        <button @click="openWhatsApp('consultation')" class="bg-emerald-600 hover:bg-emerald-700 text-white p-4 rounded-full shadow-2xl flex items-center justify-center transition transform hover:scale-110 active:scale-95" title="Konsultasi WhatsApp">
+            <i data-lucide="message-square" class="w-7 h-7"></i>
+        </button>
+    </div>
+
+    <!-- Footer Section -->
+    <footer class="bg-brand-navy text-white border-t border-white/10 pt-16 pb-12 w-full mt-auto shrink-0 relative z-30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div class="space-y-4">
+                <div class="flex items-center space-x-3">
+                    <div class="w-8 h-8 rounded-full bg-brand-navy border border-brand-gold flex items-center justify-center p-0.5 shrink-0">
+                        <svg viewBox="0 0 100 100" class="w-full h-full">
+                            <circle cx="50" cy="50" r="46" fill="#0D2137" stroke="#D4AF37" stroke-width="3"/>
+                            <path d="M 40 46 Q 52 42 66 32 L 62 26 L 68 28 L 74 24 L 72 31 L 76 34 L 70 36 Q 52 48 38 48 Z" fill="#D4AF37"/>
+                            <path d="M 18 62 Q 34 54 50 62 T 82 62" fill="none" stroke="#1E6091" stroke-width="4"/>
+                        </svg>
+                    </div>
+                    <span class="font-extrabold tracking-tight text-base text-brand-gold">PT. HAPPY TOUR AND TRAVEL</span>
+                </div>
+                <p class="text-xs text-slate-300 leading-relaxed">
+                    "Your Holiday Happiness is Our Highest Priority." <span x-text="t('footer_desc')"></span>
+                </p>
+            </div>
+            <div>
+                <h4 class="font-bold text-sm text-brand-sky mb-4" x-text="t('footer_nav')"></h4>
+                <ul class="space-y-2 text-xs text-slate-300">
+                    <li><button @click="navigate('home')" class="hover:underline" x-text="t('nav_home')"></button></li>
+                    <li><button @click="navigate('packages')" class="hover:underline" x-text="t('nav_packages')"></button></li>
+                    <li><button @click="navigate('destinations')" class="hover:underline" x-text="t('nav_destinations')"></button></li>
+                    <li><button @click="navigate('services')" class="hover:underline" x-text="t('nav_services')"></button></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold text-sm text-brand-sky mb-4" x-text="t('footer_official_flyers')"></h4>
+                <ul class="space-y-2 text-xs text-slate-300">
+                    <li>Batam Explore (Rp 350.000 / pax)</li>
+                    <li>Bintan Explore (Rp 480.000 / pax)</li>
+                    <li>Malaysia - Batam 3D2N (RM 580 / pax)</li>
+                    <li>Batam - Bintan - Penyengat 3D2N (RM 650 / pax)</li>
+                    <li>Honeymoon Packages 3D2N</li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold text-sm text-brand-sky mb-4" x-text="t('footer_contact_official')"></h4>
+                <p class="text-xs text-slate-300 mb-2"><i data-lucide="phone" class="w-3 h-3 inline text-brand-gold mr-1"></i> +62-853-5574-8039</p>
+                <p class="text-xs text-slate-300"><i data-lucide="map-pin" class="w-3 h-3 inline text-brand-gold mr-1"></i> Batam City, Kepulauan Riau</p>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 pt-6 border-t border-white/10 text-center text-xs text-slate-400">
+            &copy; 2026 PT. Happy Tour and Travel. All Rights Reserved.
+        </div>
+    </footer>
+
+    <!-- Application Script -->
+    <script>
+        function happyTourApp() {
+            return {
+                currentView: 'home',
+                mobileMenuOpen: false,
+                phoneNumber: '6285355748039',
+                lang: localStorage.getItem('happytour_lang') || 'id',
+                selectedPackage: null,
+                selectedArticle: null,
+                activeLightbox: null,
+                addPackageModalOpen: false,
+                editingPackage: null,
+                customTripModalOpen: false,
+
+                // Modal travel date & travelers count
+                modalTravelDate: '',
+                modalTravelers: 1,
+
+                // Promos State tracking
+                promoState: {},
+
+                // Exchange Rates Config (Base: IDR)
+                exchangeRates: {
+                    IDR: 1,
+                    MYR: 0.00030, // 1 MYR ~ 3,333 IDR
+                    USD: 0.000064 // 1 USD ~ 15,600 IDR
+                },
+
+                // Page Photos State (Non-Package Pictures Managed in Admin Section B)
+                pagePhotos: JSON.parse(localStorage.getItem('happytour_page_photos')) || {
+                    heroBanner: 'https://images.unsplash.com/photo-1512100356356-de1b84283e18?auto=format&fit=crop&w=1000&q=80'
+                },
+                heroPhotoInput: '',
+                heroPhotoPreview: '',
+
+                // Custom Trip Form
+                customForm: {
+                    destination: 'Batam City',
+                    date: '',
+                    travelers: 2,
+                    tripType: 'Persendirian / Private'
+                },
+
+                // Filters
+                filter: {
+                    search: '',
+                    category: '',
+                    destination: '',
+                    sort: 'recommended'
+                },
+
+                // Finder
+                finder: {
+                    destination: '',
+                    category: '',
+                    date: '',
+                    travelers: 1
+                },
+
+                // Contact Form
+                contactForm: {
+                    name: '',
+                    destination: 'Batam',
+                    date: '',
+                    travelers: 2,
+                    message: ''
+                },
+
+                // Admin New Package Form
+                newPkg: {
+                    title: '',
+                    destination: '',
+                    category: 'Explore Package',
+                    currency: 'IDR',
+                    price: 350000,
+                    image: '',
+                    description: ''
+                },
+
+                // Comprehensive Centralized Translations (ID / MS / EN)
+                translations: {
+                    id: {
+                        nav_home: 'Beranda',
+                        nav_packages: 'Paket Wisata',
+                        nav_destinations: 'Destinasi',
+                        nav_services: 'Layanan',
+                        nav_promos: 'Promo',
+                        nav_about: 'Tentang Kami',
+                        nav_gallery: 'Galeri',
+                        nav_articles: 'Artikel',
+                        nav_contact: 'Kontak',
+
+                        hero_title1: 'Kebahagiaan Liburan Anda',
+                        hero_title2: 'Adalah Prioritas Utama Kami.',
+                        hero_subtitle: 'Nikmati liburan seru dan berkesan di Batam, Bintan, Malaysia, Singapore, hingga Honeymoon spesial bersama PT. Happy Tour and Travel. Berangkat setiap hari!',
+                        btn_explore: 'Jelajahi Paket',
+                        btn_plan_trip: 'Rencanakan Perjalanan',
+                        trusted_agent: 'Resmi & Terpercaya',
+                        top_daily_departures: 'Berangkat Setiap Hari',
+
+                        finder_heading: 'Cari Trip Impian Anda',
+                        lbl_destination: 'Pilih Destinasi',
+                        lbl_category: 'Kategori Trip',
+                        lbl_travel_date: 'Tanggal Perjalanan',
+                        lbl_travelers: 'Jumlah Peserta',
+                        lbl_trip_type: 'Jenis Perjalanan',
+                        opt_all_destinations: 'Semua Destinasi',
+                        opt_all_categories: 'Semua Kategori',
+                        opt_private: 'Privat (Private)',
+                        opt_group: 'Rombongan (Group)',
+                        opt_honeymoon: 'Bulan Madu (Honeymoon)',
+                        btn_search_pkg: 'Cari Paket',
+
+                        tag_popular_dest: 'Destinasi Populer',
+                        heading_popular_dest: 'Eksplorasi Tempat Favorit',
+                        link_all_dest: 'Lihat Semua Destinasi',
+
+                        tag_official_flyers: 'Pilihan Brosur Resmi',
+                        heading_featured_packages: 'Paket Wisata Unggulan',
+                        link_all_packages: 'Lihat Semua Paket',
+                        lbl_starting_from: 'Harga Per Orang',
+                        btn_detail: 'Detail',
+                        btn_pkg_detail: 'Detail Paket',
+                        btn_enquire_wa: 'Tanya via WhatsApp',
+                        btn_book_wa: 'Pesan Sekarang via WA',
+                        btn_consult_wa: 'Konsultasi via WhatsApp',
+                        btn_consult_trip: 'Konsultasi Perjalanan',
+
+                        why_us_tag: 'Keunggulan Layanan',
+                        why_us_title: 'Mengapa Memilih PT. Happy Tour and Travel?',
+                        why_1_title: 'Berangkat Setiap Hari',
+                        why_1_desc: 'Jadwal trip harian yang pasti dan fleksibel tanpa khawatir pembatalan.',
+                        why_2_title: 'Diskon Rombongan',
+                        why_2_desc: 'Dapatkan diskon spesial untuk pemesanan rombongan (>4 orang / >10 orang).',
+                        why_3_title: 'Fasilitas Lengkap',
+                        why_3_desc: 'Termasuk Tiket Ferry/Roro, Mobil AC, Driver/Guide profesional & itinerary lengkap.',
+                        why_4_title: 'Layanan Tanggap 24/7',
+                        why_4_desc: 'Tim kami siap membantu perencanaan perjalanan Anda kapan saja via WhatsApp.',
+
+                        pkg_catalog_tag: 'Katalog Lengkap',
+                        pkg_catalog_title: 'Pilih Paket Wisata Pilihan Anda',
+                        ph_search_package: 'Cari paket wisata...',
+                        sort_recommended: 'Rekomendasi',
+                        sort_price_low: 'Harga Terendah',
+                        sort_price_high: 'Harga Tertinggi',
+                        packages_found: 'paket ditemukan',
+                        btn_reset_filters: 'Reset Filter',
+                        no_packages_found: 'Tidak ada paket yang sesuai',
+                        no_packages_sub: 'Coba ubah kata kunci pencarian atau filter kategori Anda.',
+                        lbl_price: 'Harga Per Orang',
+
+                        dest_title: 'Destinasi Wisata Pilihan',
+                        btn_view_dest_pkg: 'Lihat Paket Destinasi Ini',
+
+                        services_title: 'Layanan Perjalanan Profesional Kami',
+                        btn_consult_service: 'Konsultasikan Layanan Ini',
+
+                        promos_title: 'Penawaran Promo Spesial Liburan',
+                        lbl_promo_price_pax: 'Harga Promo / Orang',
+                        btn_claim_promo: 'Klaim Promo via WA',
+                        promo_min_pax_notice: 'Minimal {min} orang untuk memenuhi syarat promo.',
+                        lbl_total_price: 'Total Harga',
+
+                        about_intro: 'Agen perjalanan resmi terpercaya di Kota Batam, Kepulauan Riau. Melayani perjalanan paket wisata Batam, Bintan, Malaysia, Singapore, dan Honeymoon dengan jadwal harian.',
+                        about_story_title: 'Sejarah Kami',
+                        about_story_desc: 'PT. Happy Tour and Travel didirikan untuk memberikan kemudahan liburan antar pulau dan antar negara secara fleksibel, aman, dan berkesan dari gerbang strategis Batam.',
+                        about_who_title: 'Siapa Kami',
+                        about_who_desc: 'Tim pemandu lokal berpengalaman dan koordinator trip profesional yang siap mendampingi perjalanan keluarga, privat, maupun rombongan instansi/perusahaan.',
+                        about_mission_title: 'Misi Kami',
+                        about_mission_desc: 'Menyediakan layanan tour berkualitas dengan transparansi harga, kepastian berangkat harian, dan pelayanan ramah sepenuh hati.',
+                        about_vision_title: 'Visi Kami',
+                        about_vision_desc: 'Menjadi mitra perjalanan wisata nomor satu di Kepulauan Riau yang diandalkan oleh wisatawan domestik dan mancanegara.',
+                        about_core_services: 'Layanan Utama Kami',
+                        about_core_1: 'Koordinasi Tiket Ferry & Roro Terminal',
+                        about_core_2: 'Private Tour & Sewa Mobil AC',
+                        about_core_3: 'Public & Group Open Trip Harian',
+                        about_core_4: 'Paket Honeymoon & Resort Spesial',
+                        about_transparency: 'Komitmen Transparansi',
+                        about_transparency_desc: 'Setiap informasi rinci mencakup fasilitas include & exclude serta kalkulasi harga peserta disampaikan dengan jujur dan jelas.',
+
+                        gallery_title: 'Galeri Dokumentasi Wisatawan',
+                        articles_title: 'Artikel & Panduan Perjalanan',
+                        btn_read_more: 'Baca Selengkapnya',
+                        btn_back_articles: 'Kembali ke Daftar Artikel',
+                        article_question_prompt: 'Ada pertanyaan seputar artikel atau rencana perjalanan ini?',
+
+                        contact_title: 'Hubungi PT. Happy Tour and Travel',
+                        contact_info_heading: 'Informasi Layanan Pelanggan',
+                        contact_example_title: 'Contoh Format Pesan Inquiry',
+                        contact_example_label: 'Format Bahasa Indonesia',
+                        contact_example_quote: '"Halo PT. Happy Tour and Travel, saya ingin bertanyakan paket wisata Batam untuk 4 orang tanggal 20 November 2026. Mohon rincian harga total dan itinerary. Terima kasih."',
+                        contact_form_heading: 'Formulir Pesan WhatsApp Otomatis',
+                        lbl_full_name: 'Nama Lengkap Anda',
+                        lbl_message: 'Pesan Tambahan',
+                        ph_contact_msg: 'Tuliskan kebutuhan khusus atau pertanyaan Anda...',
+                        btn_send_inquiry_wa: 'Kirim Pertanyaan ke WhatsApp Resmi',
+
+                        lbl_pkg_desc: 'Deskripsi Paket',
+                        lbl_itinerary: 'Rencana Perjalanan (Itinerary)',
+                        lbl_calc_pax_title: 'Hitung Total Harga Peserta',
+                        lbl_price_per_pax_sub: 'Harga Per Orang:',
+                        lbl_pax_unit: 'Peserta',
+                        lbl_include: 'Sudah Termasuk',
+                        lbl_exclude: 'Belum Termasuk',
+                        lbl_total_order: 'Total Pesanan',
+
+                        footer_desc: 'Agen perjalanan wisata resmi Batam, Bintan, Malaysia, dan Singapore.',
+                        footer_nav: 'Navigasi Cepat',
+                        footer_official_flyers: 'Paket Populer',
+                        footer_contact_official: 'Kontak Kantor Pusat'
+                    },
+                    ms: {
+                        nav_home: 'Laman Utama',
+                        nav_packages: 'Pakej Pelancongan',
+                        nav_destinations: 'Destinasi',
+                        nav_services: 'Perkhidmatan',
+                        nav_promos: 'Promosi',
+                        nav_about: 'Tentang Kami',
+                        nav_gallery: 'Galeri',
+                        nav_articles: 'Artikel',
+                        nav_contact: 'Hubungi Kami',
+
+                        hero_title1: 'Kegembiraan Cuti Anda',
+                        hero_title2: 'Adalah Keutamaan Utama Kami.',
+                        hero_subtitle: 'Nikmati percutian yang indah di Batam, Bintan, Malaysia, Singapura, dan Bulan Madu bersama PT. Happy Tour and Travel. Berlepas setiap hari!',
+                        btn_explore: 'Terokai Pakej',
+                        btn_plan_trip: 'Rancang Perjalanan',
+                        trusted_agent: 'Rasmi & Dipercayai',
+                        top_daily_departures: 'Berlepas Setiap Hari',
+
+                        finder_heading: 'Cari Percutian Impian Anda',
+                        lbl_destination: 'Pilih Destinasi',
+                        lbl_category: 'Kategori Percutian',
+                        lbl_travel_date: 'Tarikh Perjalanan',
+                        lbl_travelers: 'Bilangan Peserta',
+                        lbl_trip_type: 'Jenis Perjalanan',
+                        opt_all_destinations: 'Semua Destinasi',
+                        opt_all_categories: 'Semua Kategori',
+                        opt_private: 'Persendirian (Private)',
+                        opt_group: 'Kumpulan (Group)',
+                        opt_honeymoon: 'Bulan Madu (Honeymoon)',
+                        btn_search_pkg: 'Cari Pakej',
+
+                        tag_popular_dest: 'Destinasi Popular',
+                        heading_popular_dest: 'Eksplorasi Lokasi Pilihan',
+                        link_all_dest: 'Lihat Semua Destinasi',
+
+                        tag_official_flyers: 'Brosur Rasmi',
+                        heading_featured_packages: 'Pakej Pelancongan Utama',
+                        link_all_packages: 'Lihat Semua Pakej',
+                        lbl_starting_from: 'Harga Seorang',
+                        btn_detail: 'Butiran',
+                        btn_pkg_detail: 'Butiran Pakej',
+                        btn_enquire_wa: 'Tanya via WhatsApp',
+                        btn_book_wa: 'Tempah Sekarang via WA',
+                        btn_consult_wa: 'Konsultasi via WhatsApp',
+                        btn_consult_trip: 'Konsultasi Perjalanan',
+
+                        why_us_tag: 'Kelebihan Kami',
+                        why_us_title: 'Mengapa Memilih PT. Happy Tour and Travel?',
+                        why_1_title: 'Berlepas Setiap Hari',
+                        why_1_desc: 'Jadual harian yang terjamin dan fleksibel tanpa bimbang pembatalan.',
+                        why_2_title: 'Diskaun Kumpulan',
+                        why_2_desc: 'Nikmati diskaun istimewa untuk tempahan kumpulan (>4 orang / >10 orang).',
+                        why_3_title: 'Kemudahan Lengkap',
+                        why_3_desc: 'Termasuk Tiket Feri/Roro, Kenderaan Berhawa Dingin, Pemandu & Guide profesional.',
+                        why_4_title: 'Perkhidmatan Pantas 24/7',
+                        why_4_desc: 'Pasukan kami sedia membantu perancangan percutian anda pada bila-bila masa.',
+
+                        pkg_catalog_tag: 'Katalog Lengkap',
+                        pkg_catalog_title: 'Pilih Pakej Pelancongan Pilihan Anda',
+                        ph_search_package: 'Cari pakej percutian...',
+                        sort_recommended: 'Syor Utama',
+                        sort_price_low: 'Harga Terendah',
+                        sort_price_high: 'Harga Tertinggi',
+                        packages_found: 'pakej dijumpai',
+                        btn_reset_filters: 'Tetapkan Semula Filter',
+                        no_packages_found: 'Tiada pakej yang sepadan',
+                        no_packages_sub: 'Sila cuba carian kata kunci atau filter yang lain.',
+                        lbl_price: 'Harga Seorang',
+
+                        dest_title: 'Destinasi Pelancongan Pilihan',
+                        btn_view_dest_pkg: 'Lihat Pakej Destinasi Ini',
+
+                        services_title: 'Perkhidmatan Pelancongan Profesional Kami',
+                        btn_consult_service: 'Konsultasi Perkhidmatan Ini',
+
+                        promos_title: 'Tawaran Promosi Istimewa Cuti',
+                        lbl_promo_price_pax: 'Harga Promo / Seorang',
+                        btn_claim_promo: 'Tuntut Promo via WA',
+                        promo_min_pax_notice: 'Minima {min} orang untuk layak menikmati harga promo ini.',
+                        lbl_total_price: 'Jumlah Harga',
+
+                        about_intro: 'Agensi pelancongan rasmi berdaftar di Kota Batam, Kepulauan Riau. Menyediakan pakej pelancongan Batam, Bintan, Malaysia, Singapura, dan Bulan Madu secara harian.',
+                        about_story_title: 'Sejarah Kami',
+                        about_story_desc: 'PT. Happy Tour and Travel ditubuhkan untuk memudahkan percutian rentas pulau dan rentas sempadan dengan selamat dan selesa.',
+                        about_who_title: 'Siapa Kami',
+                        about_who_desc: 'Pasukan pemandu pelancong berpengalaman dan penyelaras trip profesional yang bersedia melayani anda.',
+                        about_mission_title: 'Misi Kami',
+                        about_mission_desc: 'Menyediakan perkhidmatan pelancongan berkualiti dengan harga telus dan layanan mesra.',
+                        about_vision_title: 'Visi Kami',
+                        about_vision_desc: 'Menjadi rakan perjalanan nombor satu pilihan pelancong di Kepulauan Riau.',
+                        about_core_services: 'Perkhidmatan Utama',
+                        about_core_1: 'Pengurusan Tiket Feri & Terminal Roro',
+                        about_core_2: 'Pakej Persendirian & Sewa Kereta AC',
+                        about_core_3: 'Trip Awam & Kumpulan Harian',
+                        about_core_4: 'Pakej Bulan Madu & Resort Istimewa',
+                        about_transparency: 'Komitmen Ketelusan',
+                        about_transparency_desc: 'Semua maklumat kemudahan serta pengiraan harga disampaikan secara jujur dan jelas.',
+
+                        gallery_title: 'Galeri Dokumentasi Pelancong',
+                        articles_title: 'Artikel & Panduan Percutian',
+                        btn_read_more: 'Baca Selengkapnya',
+                        btn_back_articles: 'Kembali ke Senarai Artikel',
+                        article_question_prompt: 'Ada sebarang pertanyaan mengenai artikel atau perancangan trip ini?',
+
+                        contact_title: 'Hubungi PT. Happy Tour and Travel',
+                        contact_info_heading: 'Maklumat Perkhidmatan Pelanggan',
+                        contact_example_title: 'Contoh Format Mesej Pertanyaan',
+                        contact_example_label: 'Format Bahasa Melayu',
+                        contact_example_quote: '"Salam PT. Happy Tour and Travel, saya ingin bertanya tentang pakej percutian Batam untuk 4 orang pada 20 November 2026. Mohon rincian harga dan jadual trip. Terima kasih."',
+                        contact_form_heading: 'Borang Mesej WhatsApp Automatik',
+                        lbl_full_name: 'Nama Penuh Anda',
+                        lbl_message: 'Mesej Tambahan',
+                        ph_contact_msg: 'Tuliskan keperluan khas atau pertanyaan anda...',
+                        btn_send_inquiry_wa: 'Hantar Pertanyaan ke WhatsApp Rasmi',
+
+                        lbl_pkg_desc: 'Penerangan Pakej',
+                        lbl_itinerary: 'Jadual Perjalanan (Itinerary)',
+                        lbl_calc_pax_title: 'Kira Jumlah Harga Peserta',
+                        lbl_price_per_pax_sub: 'Harga Seorang:',
+                        lbl_pax_unit: 'Peserta',
+                        lbl_include: 'Termasuk',
+                        lbl_exclude: 'Tidak Termasuk',
+                        lbl_total_order: 'Jumlah Tempahan',
+
+                        footer_desc: 'Agensi pelancongan rasmi Batam, Bintan, Malaysia, dan Singapura.',
+                        footer_nav: 'Pautan Pantas',
+                        footer_official_flyers: 'Pakej Popular',
+                        footer_contact_official: 'Hubungi Pejabat Utama'
+                    },
+                    en: {
+                        nav_home: 'Home',
+                        nav_packages: 'Tour Packages',
+                        nav_destinations: 'Destinations',
+                        nav_services: 'Services',
+                        nav_promos: 'Promotions',
+                        nav_about: 'About Us',
+                        nav_gallery: 'Gallery',
+                        nav_articles: 'Articles',
+                        nav_contact: 'Contact Us',
+
+                        hero_title1: 'Your Holiday Happiness',
+                        hero_title2: 'Is Our Highest Priority.',
+                        hero_subtitle: 'Experience unforgettable travel across Batam, Bintan, Malaysia, Singapore, and romantic Honeymoons with PT. Happy Tour and Travel. Daily departures!',
+                        btn_explore: 'Explore Packages',
+                        btn_plan_trip: 'Plan Custom Trip',
+                        trusted_agent: 'Official & Licensed',
+                        top_daily_departures: 'Daily Departures',
+
+                        finder_heading: 'Find Your Dream Vacation',
+                        lbl_destination: 'Select Destination',
+                        lbl_category: 'Trip Category',
+                        lbl_travel_date: 'Travel Date',
+                        lbl_travelers: 'Travelers',
+                        lbl_trip_type: 'Trip Type',
+                        opt_all_destinations: 'All Destinations',
+                        opt_all_categories: 'All Categories',
+                        opt_private: 'Private Tour',
+                        opt_group: 'Group Tour',
+                        opt_honeymoon: 'Honeymoon Getaway',
+                        btn_search_pkg: 'Search Packages',
+
+                        tag_popular_dest: 'Popular Destinations',
+                        heading_popular_dest: 'Explore Top Locations',
+                        link_all_dest: 'View All Destinations',
+
+                        tag_official_flyers: 'Official Catalog',
+                        heading_featured_packages: 'Featured Tour Packages',
+                        link_all_packages: 'View All Packages',
+                        lbl_starting_from: 'Price Per Person',
+                        btn_detail: 'Details',
+                        btn_pkg_detail: 'Package Details',
+                        btn_enquire_wa: 'Enquire via WhatsApp',
+                        btn_book_wa: 'Book Now via WhatsApp',
+                        btn_consult_wa: 'Consult via WhatsApp',
+                        btn_consult_trip: 'Consult Travel Plan',
+
+                        why_us_tag: 'Our Strengths',
+                        why_us_title: 'Why Choose PT. Happy Tour and Travel?',
+                        why_1_title: 'Guaranteed Daily Departures',
+                        why_1_desc: 'Flexible and reliable daily trip schedules without cancellation worries.',
+                        why_2_title: 'Group Discounts',
+                        why_2_desc: 'Special discounted rates for group bookings (>4 or >10 travelers).',
+                        why_3_title: 'Complete Amenities',
+                        why_3_desc: 'Includes Ferry/Roro tickets, AC vehicles, professional driver & tour guides.',
+                        why_4_title: '24/7 Responsive Support',
+                        why_4_desc: 'Our dedicated team is ready to assist your travel planning anytime via WhatsApp.',
+
+                        pkg_catalog_tag: 'Full Catalog',
+                        pkg_catalog_title: 'Select Your Preferred Travel Package',
+                        ph_search_package: 'Search travel packages...',
+                        sort_recommended: 'Recommended',
+                        sort_price_low: 'Price: Low to High',
+                        sort_price_high: 'Price: High to Low',
+                        packages_found: 'packages found',
+                        btn_reset_filters: 'Reset Filters',
+                        no_packages_found: 'No matching packages found',
+                        no_packages_sub: 'Try adjusting your search keywords or filter criteria.',
+                        lbl_price: 'Price Per Person',
+
+                        dest_title: 'Top Travel Destinations',
+                        btn_view_dest_pkg: 'View Packages For This Destination',
+
+                        services_title: 'Our Professional Travel Services',
+                        btn_consult_service: 'Consult About This Service',
+
+                        promos_title: 'Special Vacation Offers & Promos',
+                        lbl_promo_price_pax: 'Promo Price / Pax',
+                        btn_claim_promo: 'Claim Promo via WA',
+                        promo_min_pax_notice: 'Minimum {min} travelers required for this promo rate.',
+                        lbl_total_price: 'Total Price',
+
+                        about_intro: 'Official licensed travel agency based in Batam City, Riau Islands. Providing daily tour packages for Batam, Bintan, Malaysia, Singapore, and Honeymoons.',
+                        about_story_title: 'Our Story',
+                        about_story_desc: 'PT. Happy Tour and Travel was established to deliver seamless, comfortable, and memorable cross-island and international travel from Batam.',
+                        about_who_title: 'Who We Are',
+                        about_who_desc: 'A dedicated team of local experts, tour guides, and coordinators committed to providing genuine hospitality.',
+                        about_mission_title: 'Our Mission',
+                        about_mission_desc: 'To offer high-quality tour packages with transparent pricing, guaranteed departures, and warm service.',
+                        about_vision_title: 'Our Vision',
+                        about_vision_desc: 'To be the most trusted travel partner in the Riau Islands region for both domestic and international visitors.',
+                        about_core_services: 'Core Services',
+                        about_core_1: 'Ferry & Roro Terminal Ticket Handling',
+                        about_core_2: 'Private Tours & AC Vehicle Rentals',
+                        about_core_3: 'Public & Shared Daily Group Tours',
+                        about_core_4: 'Special Honeymoon & Resort Packages',
+                        about_transparency: 'Commitment to Transparency',
+                        about_transparency_desc: 'All package inclusions, exclusions, and total price breakdowns are clearly presented upfront.',
+
+                        gallery_title: 'Traveler Documentation Gallery',
+                        articles_title: 'Travel Articles & Guides',
+                        btn_read_more: 'Read Full Article',
+                        btn_back_articles: 'Back to Articles List',
+                        article_question_prompt: 'Have questions about this article or trip plan?',
+
+                        contact_title: 'Contact PT. Happy Tour and Travel',
+                        contact_info_heading: 'Customer Service Information',
+                        contact_example_title: 'Example Inquiry Format',
+                        contact_example_label: 'English Format',
+                        contact_example_quote: '"Hello PT. Happy Tour and Travel, I would like to enquire about a Batam tour package for 4 people on 20 Nov 2026. Please send details and total pricing. Thank you."',
+                        contact_form_heading: 'Automatic WhatsApp Message Form',
+                        lbl_full_name: 'Your Full Name',
+                        lbl_message: 'Additional Message',
+                        ph_contact_msg: 'Type any special requests or questions...',
+                        btn_send_inquiry_wa: 'Send Inquiry to Official WhatsApp',
+
+                        lbl_pkg_desc: 'Package Description',
+                        lbl_itinerary: 'Itinerary Plan',
+                        lbl_calc_pax_title: 'Calculate Total Price',
+                        lbl_price_per_pax_sub: 'Price Per Person:',
+                        lbl_pax_unit: 'Pax',
+                        lbl_include: 'Includes',
+                        lbl_exclude: 'Excludes',
+                        lbl_total_order: 'Total Order',
+
+                        footer_desc: 'Official travel agency for Batam, Bintan, Malaysia, and Singapore.',
+                        footer_nav: 'Quick Links',
+                        footer_official_flyers: 'Popular Packages',
+                        footer_contact_official: 'Headquarters Contact'
+                    }
+                },
+
+                // Active Destinations Dataset
+                destinations: [
+                    {
+                        id: 1,
+                        name: 'Batam City',
+                        country: 'Indonesia',
+                        image: 'https://images.unsplash.com/photo-1512100356356-de1b84283e18?auto=format&fit=crop&w=800&q=80',
+                        desc_id: 'Destinasi wisata belanja, kuliner seafood, & Landmark Jembatan Barelang.',
+                        desc_ms: 'Destinasi perbelanjaan, makanan laut, & Landmark Jambatan Barelang.',
+                        desc_en: 'Shopping, fresh seafood dining, & the iconic Barelang Bridge landmark.'
+                    },
+                    {
+                        id: 2,
+                        name: 'Bintan Island',
+                        country: 'Indonesia',
+                        image: 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=800&q=80',
+                        desc_id: 'Resort pantai mewah, Gurun Pasir Busung, & Telaga Biru yang eksotis.',
+                        desc_ms: 'Resort pantai mewah, Padang Pasir Busung, & Telaga Biru yang indah.',
+                        desc_en: 'Luxury beach resorts, Busung Sand Dunes, & exotic Blue Lake.'
+                    },
+                    {
+                        id: 3,
+                        name: 'Malaysia',
+                        country: 'International',
+                        image: 'https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=800&q=80',
+                        desc_id: 'Kuala Lumpur, Genting Highlands, Batu Caves, & Malacca Heritage.',
+                        desc_ms: 'Kuala Lumpur, Genting Highlands, Batu Caves, & Warisan Melaka.',
+                        desc_en: 'Kuala Lumpur, Genting Highlands, Batu Caves, & Historic Malacca.'
+                    },
+                    {
+                        id: 4,
+                        name: 'Singapore',
+                        country: 'International',
+                        image: 'https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=800&q=80',
+                        desc_id: 'Jewel Changi, Merlion Park, Gardens by the Bay, & Universal Studios.',
+                        desc_ms: 'Jewel Changi, Taman Merlion, Gardens by the Bay, & Universal Studios.',
+                        desc_en: 'Jewel Changi, Merlion Park, Gardens by the Bay, & Universal Studios.'
+                    }
+                ],
+
+                // Active Packages Dataset (Base Currency IDR)
+                packages: JSON.parse(localStorage.getItem('happytour_packages')) || [
+                    {
+                        id: 'pkg-1',
+                        title_id: 'Batam Explore One Day Tour',
+                        title_ms: 'Batam Explore Tour Satu Hari',
+                        title_en: 'Batam Explore One Day Tour',
+                        title: 'Batam Explore One Day Tour',
+                        destination: 'Batam City',
+                        category: 'Explore Package',
+                        duration: '1 Day Trip',
+                        currency: 'IDR',
+                        price: 350000,
+                        image: 'https://images.unsplash.com/photo-1512100356356-de1b84283e18?auto=format&fit=crop&w=800&q=80',
+                        desc_id: 'Jelajahi keindahan Jembatan Barelang, Museum Raja Ali Haji, Welcome To Batam, dan pusat oleh-oleh.',
+                        desc_ms: 'Terokai keindahan Jambatan Barelang, Muzium Raja Ali Haji, Welcome To Batam, dan pusat cenderamata.',
+                        desc_en: 'Explore Barelang Bridge, Raja Ali Haji Museum, Welcome to Batam sign, and local souvenir centers.',
+                        description: 'Jelajahi keindahan Jembatan Barelang, Museum Raja Ali Haji, Welcome To Batam, dan pusat oleh-oleh.',
+                        includes: ['Transportasi AC', 'Makan Siang Seafood', 'Driver / Guide', 'Air Mineral'],
+                        excludes: ['Pengeluaran Pribadi', 'Tipping Driver'],
+                        scheduleText: 'Berangkat Setiap Hari',
+                        minPax: 1
+                    },
+                    {
+                        id: 'pkg-2',
+                        title_id: 'Bintan Lagoi & Gurun Pasir Tour',
+                        title_ms: 'Bintan Lagoi & Padang Pasir Tour',
+                        title_en: 'Bintan Lagoi & Sand Dunes Tour',
+                        title: 'Bintan Lagoi & Gurun Pasir Tour',
+                        destination: 'Bintan Island',
+                        category: 'Explore Package',
+                        duration: '1 Day Trip',
+                        currency: 'IDR',
+                        price: 480000,
+                        image: 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=800&q=80',
+                        desc_id: 'Kunjungan ke Gurun Pasir Busung, Telaga Biru, Kawasan Resort Lagoi Bay, & Patung 1000.',
+                        desc_ms: 'Lawatan ke Padang Pasir Busung, Telaga Biru, Kawasan Lagoi Bay, & Patung 1000.',
+                        desc_en: 'Visit Busung Sand Dunes, Blue Lake, Lagoi Bay Resort area, & 1000 Arhat Temple.',
+                        description: 'Kunjungan ke Gurun Pasir Busung, Telaga Biru, Kawasan Resort Lagoi Bay, & Patung 1000.',
+                        includes: ['Tiket Roro / Ferry PP', 'Mobil AC', 'Makan Siang', 'Guide'],
+                        excludes: ['Wahana Anmon / Treasure Bay', 'Tipping'],
+                        scheduleText: 'Berangkat Setiap Hari',
+                        minPax: 1
+                    },
+                    {
+                        id: 'pkg-3',
+                        title_id: '3D2N Malaysia & Batam Cross Border',
+                        title_ms: '3D2N Malaysia & Batam Cross Border',
+                        title_en: '3D2N Malaysia & Batam Cross Border',
+                        title: '3D2N Malaysia & Batam Cross Border',
+                        destination: 'Malaysia',
+                        category: 'Multi-Day Trip',
+                        duration: '3D2N',
+                        currency: 'IDR',
+                        price: 1950000,
+                        image: 'https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=800&q=80',
+                        desc_id: 'Paket kombinasi seru 3 Hari 2 Malam menjelajahi ikon Kuala Lumpur, Malacca, dan Batam City.',
+                        desc_ms: 'Pakej kombinasi 3 Hari 2 Malam menerokai ikon Kuala Lumpur, Melaka, dan Bandar Batam.',
+                        desc_en: 'Exciting 3D2N cross-border combination package exploring Kuala Lumpur, Malacca, and Batam City.',
+                        description: 'Paket kombinasi seru 3 Hari 2 Malam menjelajahi ikon Kuala Lumpur, Malacca, dan Batam City.',
+                        includes: ['Hotel *3 (2 Malam)', 'Tiket Ferry PP', 'Transportasi Bus AC', 'Makan Sesuai Program'],
+                        excludes: ['Paspor', 'Asuransi Perjalanan', 'Tipping'],
+                        scheduleText: 'Keberangkatan Setiap Minggu',
+                        minPax: 2
+                    }
+                ],
+
+                // Active Services Dataset
+                services: [
+                    { id: 1, serviceKey: 'ferry', title_id: 'Sewa & Tiket Ferry / Roro', title_ms: 'Sewa & Tiket Feri / Roro', title_en: 'Ferry & Roro Ticket Booking', desc_id: 'Layanan pemesanan tiket ferry cepat Batam-Bintan, Singapore, & Malaysia dengan konfirmasi instan.', desc_ms: 'Perkhidmatan tempahan tiket feri laju Batam-Bintan, Singapura, & Malaysia dengan pengesahan pantas.', desc_en: 'Fast ferry ticket reservation for Batam-Bintan, Singapore, & Malaysia routes.', icon: 'ship' },
+                    { id: 2, serviceKey: 'private', title_id: 'Private Car & Bus Charter', title_ms: 'Sewa Kereta Persendirian & Bas', title_en: 'Private Car & Bus Charter', desc_id: 'Sewa mobil Avanza, Innova, HiAce, hingga Bus Pariwisata include driver & BBM.', desc_ms: 'Sewa kereta Avanza, Innova, HiAce, hingga Bas Pelancongan termasuk pemandu & petrol.', desc_en: 'Private vehicle rental options (Avanza, Innova, HiAce, Coaches) with driver & fuel.', icon: 'car' },
+                    { id: 3, serviceKey: 'group', title_id: 'Tour Rombongan / Corporate', title_ms: 'Percutian Kumpulan / Korporat', title_en: 'Group & Corporate Tours', desc_id: 'Perencanaan acara gathering, outing perusahaan, & study tour dengan budget kustom.', desc_ms: 'Perancangan program syarikat, outing, & lawatan sambil belajar mengikut bajet anda.', desc_en: 'Customized group tours, corporate outings, and incentive trip planning.', icon: 'users' }
+                ],
+
+                // Active Promos Dataset
+                promos: [
+                    { id: 'promo-1', title_id: 'Promo Rombongan Batam 1 Day', title_ms: 'Promo Kumpulan Batam 1 Hari', title_en: 'Batam 1 Day Group Promo', desc_id: 'Diskon khusus pemesanan minimal 4 orang untuk paket Batam Explore.', desc_ms: 'Diskaun khas untuk tempahan minima 4 orang bagi pakej Batam Explore.', desc_en: 'Special discount for group bookings of minimum 4 travelers.', period: 'Berlaku s/d Nov 2026', minTravelers: 4, currency: 'IDR', pricePerPerson: 320000, image: 'https://images.unsplash.com/photo-1512100356356-de1b84283e18?auto=format&fit=crop&w=600&q=80' },
+                    { id: 'promo-2', title_id: 'Promo Honeymoon Bintan 3D2N', title_ms: 'Promo Bulan Madu Bintan 3D2N', title_en: 'Bintan Honeymoon 3D2N Special', desc_id: 'Paket romantic dinner, candlelight setup, & resort pantai private.', desc_ms: 'Pakej makan malam romantik, hiasan candlelight, & resort pantai persendirian.', desc_en: 'Includes romantic dinner, candlelight setup, & private beach resort stay.', period: 'Berlaku s/d Dec 2026', minTravelers: 2, currency: 'IDR', pricePerPerson: 2250000, image: 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=600&q=80' }
+                ],
+
+                // Active Articles Dataset
+                articles: [
+                    { id: 1, title_id: 'Panduan Lengkap Wisata Batam 2026', title_ms: 'Panduan Lengkap Pelancongan Batam 2026', title_en: 'Complete Batam Travel Guide 2026', date: '12 Oct 2026', image: 'https://images.unsplash.com/photo-1512100356356-de1b84283e18?auto=format&fit=crop&w=800&q=80', summary_id: 'Tips liburan hemat ke Batam, destinasi belanja recommended, dan tempat makan seafood terbaik.', summary_ms: 'Petua percutian jimat ke Batam, lokasi membeli-belah pilihan, dan restoran makanan laut terbaik.', summary_en: 'Budget tips for Batam travel, top shopping spots, and best seafood dining locations.', content_id: '<p>Kota Batam menawarkan perpaduan sempurna antara wisata belanja, pesona pantai, dan sajian kuliner laut segar...</p>' }
+                ],
+
+                // Active Gallery Dataset
+                gallery: JSON.parse(localStorage.getItem('happytour_gallery')) || [
+                    { url: 'https://images.unsplash.com/photo-1512100356356-de1b84283e18?auto=format&fit=crop&w=600&q=80', caption: 'Jembatan Barelang - Batam Landmark' },
+                    { url: 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=600&q=80', caption: 'Lagoi Bay Beach - Bintan Island' },
+                    { url: 'https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=600&q=80', caption: 'Kuala Lumpur City Tour' },
+                    { url: 'https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=600&q=80', caption: 'Gardens by the Bay - Singapore' }
+                ],
+
+                initApp() {
+                    this.promos.forEach(p => {
+                        this.promoState[p.id] = { travelers: p.minTravelers || 1 };
+                    });
+                    if (window.lucide) {
+                        this.$nextTick(() => window.lucide.createIcons());
+                    }
+                },
+
+                // Translation Helper
+                t(key) {
+                    const dict = this.translations[this.lang] || this.translations['id'];
+                    return dict[key] || this.translations['id'][key] || key;
+                },
+
+                setLang(newLang) {
+                    this.lang = newLang;
+                    localStorage.setItem('happytour_lang', newLang);
+                    this.$nextTick(() => {
+                        if (window.lucide) window.lucide.createIcons();
+                    });
+                },
+
+                navigate(view) {
+                    this.currentView = view;
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    this.$nextTick(() => {
+                        if (window.lucide) window.lucide.createIcons();
+                    });
+                },
+
+                // Multilingual Content Getters
+                getPkgTitle(pkg) {
+                    if (!pkg) return '';
+                    if (this.lang === 'ms' && pkg.title_ms) return pkg.title_ms;
+                    if (this.lang === 'en' && pkg.title_en) return pkg.title_en;
+                    return pkg.title_id || pkg.title || '';
+                },
+
+                getPkgDesc(pkg) {
+                    if (!pkg) return '';
+                    if (this.lang === 'ms' && pkg.desc_ms) return pkg.desc_ms;
+                    if (this.lang === 'en' && pkg.desc_en) return pkg.desc_en;
+                    return pkg.desc_id || pkg.description || '';
+                },
+
+                getDestDesc(dest) {
+                    if (!dest) return '';
+                    if (this.lang === 'ms' && dest.desc_ms) return dest.desc_ms;
+                    if (this.lang === 'en' && dest.desc_en) return dest.desc_en;
+                    return dest.desc_id || '';
+                },
+
+                getServiceTitle(s) {
+                    if (this.lang === 'ms' && s.title_ms) return s.title_ms;
+                    if (this.lang === 'en' && s.title_en) return s.title_en;
+                    return s.title_id || s.title || '';
+                },
+
+                getServiceDesc(s) {
+                    if (this.lang === 'ms' && s.desc_ms) return s.desc_ms;
+                    if (this.lang === 'en' && s.desc_en) return s.desc_en;
+                    return s.desc_id || '';
+                },
+
+                getPromoTitle(p) {
+                    if (this.lang === 'ms' && p.title_ms) return p.title_ms;
+                    if (this.lang === 'en' && p.title_en) return p.title_en;
+                    return p.title_id || p.title || '';
+                },
+
+                getPromoDesc(p) {
+                    if (this.lang === 'ms' && p.desc_ms) return p.desc_ms;
+                    if (this.lang === 'en' && p.desc_en) return p.desc_en;
+                    return p.desc_id || p.description || '';
+                },
+
+                getArticleTitle(art) {
+                    if (!art) return '';
+                    if (this.lang === 'ms' && art.title_ms) return art.title_ms;
+                    if (this.lang === 'en' && art.title_en) return art.title_en;
+                    return art.title_id || art.title || '';
+                },
+
+                getArticleSummary(art) {
+                    if (!art) return '';
+                    if (this.lang === 'ms' && art.summary_ms) return art.summary_ms;
+                    if (this.lang === 'en' && art.summary_en) return art.summary_en;
+                    return art.summary_id || '';
+                },
+
+                getArticleContent(art) {
+                    if (!art) return '';
+                    if (this.lang === 'ms' && art.content_ms) return art.content_ms;
+                    if (this.lang === 'en' && art.content_en) return art.content_en;
+                    return art.content_id || art.content || '';
+                },
+
+                // Currency Conversion Logic
+                // Language mapping: ID -> IDR (Rp), MS -> MYR (RM), EN -> USD ($)
+                getTargetCurrency() {
+                    if (this.lang === 'ms') return 'MYR';
+                    if (this.lang === 'en') return 'USD';
+                    return 'IDR';
+                },
+
+                convertPrice(amountInIDR) {
+                    const targetCurr = this.getTargetCurrency();
+                    const rate = this.exchangeRates[targetCurr] || 1;
+                    return amountInIDR * rate;
+                },
+
+                formatPricePerPerson(pkg) {
+                    if (!pkg || typeof pkg.price !== 'number') return '-';
+                    const targetCurr = this.getTargetCurrency();
+                    const converted = this.convertPrice(pkg.price);
+
+                    if (targetCurr === 'MYR') {
+                        return 'RM ' + Math.round(converted).toLocaleString('ms-MY');
+                    } else if (targetCurr === 'USD') {
+                        return '$' + Math.round(converted).toLocaleString('en-US');
+                    } else {
+                        return 'Rp ' + Math.round(converted).toLocaleString('id-ID');
+                    }
+                },
+
+                calculatePackageTotalFormatted(pkg) {
+                    if (!pkg || typeof pkg.price !== 'number') return '-';
+                    const travelers = this.modalTravelers || 1;
+                    const totalInIDR = pkg.price * travelers;
+                    const targetCurr = this.getTargetCurrency();
+                    const converted = this.convertPrice(totalInIDR);
+
+                    if (targetCurr === 'MYR') {
+                        return 'RM ' + Math.round(converted).toLocaleString('ms-MY');
+                    } else if (targetCurr === 'USD') {
+                        return '$' + Math.round(converted).toLocaleString('en-US');
+                    } else {
+                        return 'Rp ' + Math.round(converted).toLocaleString('id-ID');
+                    }
+                },
+
+                formatPromoPricePerPerson(p) {
+                    if (!p || typeof p.pricePerPerson !== 'number') return '-';
+                    const targetCurr = this.getTargetCurrency();
+                    const converted = this.convertPrice(p.pricePerPerson);
+
+                    if (targetCurr === 'MYR') {
+                        return 'RM ' + Math.round(converted).toLocaleString('ms-MY');
+                    } else if (targetCurr === 'USD') {
+                        return '$' + Math.round(converted).toLocaleString('en-US');
+                    } else {
+                        return 'Rp ' + Math.round(converted).toLocaleString('id-ID');
+                    }
+                },
+
+                calculatePromoTotal(p) {
+                    const travelers = this.promoState[p.id]?.travelers || p.minTravelers || 1;
+                    const totalIDR = p.pricePerPerson * travelers;
+                    const targetCurr = this.getTargetCurrency();
+                    const converted = this.convertPrice(totalIDR);
+
+                    if (targetCurr === 'MYR') {
+                        return 'RM ' + Math.round(converted).toLocaleString('ms-MY');
+                    } else if (targetCurr === 'USD') {
+                        return '$' + Math.round(converted).toLocaleString('en-US');
+                    } else {
+                        return 'Rp ' + Math.round(converted).toLocaleString('id-ID');
+                    }
+                },
+
+                // Filters Logic
+                get filteredPackages() {
+                    return this.packages.filter(p => {
+                        const matchesSearch = !this.filter.search || this.getPkgTitle(p).toLowerCase().includes(this.filter.search.toLowerCase());
+                        const matchesCategory = !this.filter.category || p.category === this.filter.category;
+                        const matchesDest = !this.filter.destination || p.destination === this.filter.destination;
+                        return matchesSearch && matchesCategory && matchesDest;
+                    }).sort((a, b) => {
+                        if (this.filter.sort === 'price-asc') return a.price - b.price;
+                        if (this.filter.sort === 'price-desc') return b.price - a.price;
+                        return 0;
+                    });
+                },
+
+                resetFilters() {
+                    this.filter = { search: '', category: '', destination: '', sort: 'recommended' };
+                },
+
+                executeFinder() {
+                    this.filter.destination = this.finder.destination;
+                    this.filter.category = this.finder.category;
+                    this.navigate('packages');
+                },
+
+                selectDestination(name) {
+                    this.filter.destination = name;
+                    this.navigate('packages');
+                },
+
+                // Modals & Actions
+                openPackageDetail(pkg) {
+                    this.selectedPackage = pkg;
+                    this.modalTravelers = pkg.minPax || 1;
+                    this.modalTravelDate = '';
+                    this.$nextTick(() => {
+                        if (window.lucide) window.lucide.createIcons();
+                    });
+                },
+
+                changeModalPax(delta) {
+                    const minAllowed = this.selectedPackage?.minPax || 1;
+                    let current = (this.modalTravelers || 1) + delta;
+                    if (current < minAllowed) current = minAllowed;
+                    this.modalTravelers = current;
+                },
+
+                validateModalPax() {
+                    const minAllowed = this.selectedPackage?.minPax || 1;
+                    if (!this.modalTravelers || this.modalTravelers < minAllowed) {
+                        this.modalTravelers = minAllowed;
+                    }
+                },
+
+                changePromoTravelers(promoId, delta) {
+                    if (!this.promoState[promoId]) this.promoState[promoId] = { travelers: 1 };
+                    let current = this.promoState[promoId].travelers + delta;
+                    if (current < 1) current = 1;
+                    this.promoState[promoId].travelers = current;
+                },
+
+                openCustomTripModal() {
+                    this.customTripModalOpen = true;
+                },
+
+                openArticleDetail(art) {
+                    this.selectedArticle = art;
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                },
+
+                // Multilingual WhatsApp Flow Integration
+                buildWaUrl(textMessage) {
+                    return `https://wa.me/${this.phoneNumber}?text=${encodeURIComponent(textMessage)}`;
+                },
+
+                openWhatsApp(type = 'consultation') {
+                    let msg = '';
+                    if (this.lang === 'ms') {
+                        msg = `Salam PT. Happy Tour & Travel! Saya berminat untuk melakukan konsultasi percutian di Batam / Bintan / Malaysia / Singapura. Mohon maklumat lanjut. Terima kasih!`;
+                    } else if (this.lang === 'en') {
+                        msg = `Hello PT. Happy Tour & Travel! I would like to enquire about tour options and travel plans in Batam / Bintan / Malaysia / Singapore. Please kindly assist me. Thank you!`;
+                    } else {
+                        msg = `Halo PT. Happy Tour & Travel! Saya ingin berkonsultasi mengenai rencana perjalanan wisata di Batam / Bintan / Malaysia / Singapore. Mohon informasinya. Terima kasih!`;
+                    }
+                    window.open(this.buildWaUrl(msg), '_blank');
+                },
+
+                openWhatsAppPackage(pkg) {
+                    const travelers = this.modalTravelers || 1;
+                    const dateStr = this.modalTravelDate ? this.modalTravelDate : '(Belum ditentukan / To be defined)';
+                    const titleStr = this.getPkgTitle(pkg);
+                    const totalStr = this.calculatePackageTotalFormatted(pkg);
+
+                    let msg = '';
+                    if (this.lang === 'ms') {
+                        msg = `Salam PT. Happy Tour & Travel,\nSaya berminat untuk menempah pakej pelancongan berikut:\n\n• Pakej: ${titleStr}\n• Destinasi: ${pkg.destination}\n• Tarikh Perjalanan: ${dateStr}\n• Bilangan Peserta: ${travelers} orang\n• Anggaran Jumlah Harga: ${totalStr}\n\nMohon maklumat lanjut mengenai ketersediaan dan borang pendaftaran. Terima kasih!`;
+                    } else if (this.lang === 'en') {
+                        msg = `Hello PT. Happy Tour & Travel,\nI am interested in booking the following tour package:\n\n• Package: ${titleStr}\n• Destination: ${pkg.destination}\n• Travel Date: ${dateStr}\n• Travelers: ${travelers} pax\n• Total Estimated Price: ${totalStr}\n\nPlease kindly share the availability and booking process. Thank you!`;
+                    } else {
+                        msg = `Halo PT. Happy Tour & Travel,\nSaya berminat untuk memesan paket wisata berikut:\n\n• Paket: ${titleStr}\n• Destinasi: ${pkg.destination}\n• Tanggal Perjalanan: ${dateStr}\n• Jumlah Peserta: ${travelers} orang\n• Estimasi Total Harga: ${totalStr}\n\nMohon informasi ketersediaan tempat dan prosedur pemesanan. Terima kasih!`;
+                    }
+                    window.open(this.buildWaUrl(msg), '_blank');
+                },
+
+                claimPromoWA(p) {
+                    const travelers = this.promoState[p.id]?.travelers || p.minTravelers || 1;
+                    const titleStr = this.getPromoTitle(p);
+                    const totalStr = this.calculatePromoTotal(p);
+
+                    let msg = '';
+                    if (this.lang === 'ms') {
+                        msg = `Salam PT. Happy Tour & Travel,\nSaya ingin menuntut Tawaran Promo berikut:\n\n• Promo: ${titleStr}\n• Tempoh: ${p.period}\n• Bilangan Peserta: ${travelers} orang\n• Jumlah Harga Promo: ${totalStr}\n\nMohon maklumat kelayakan dan syarat tempahan promo ini. Terima kasih!`;
+                    } else if (this.lang === 'en') {
+                        msg = `Hello PT. Happy Tour & Travel,\nI would like to claim the following Special Promo Offer:\n\n• Promo: ${titleStr}\n• Validity: ${p.period}\n• Travelers: ${travelers} pax\n• Total Promo Price: ${totalStr}\n\nPlease share the claim code and next steps. Thank you!`;
+                    } else {
+                        msg = `Halo PT. Happy Tour & Travel,\nSaya ingin mengklaim Penawaran Promo Spesial berikut:\n\n• Promo: ${titleStr}\n• Periode Promo: ${p.period}\n• Jumlah Peserta: ${travelers} orang\n• Total Harga Promo: ${totalStr}\n\nMohon informasi syarat dan tata cara klaim promo ini. Terima kasih!`;
+                    }
+                    window.open(this.buildWaUrl(msg), '_blank');
+                },
+
+                openServiceWA(serviceKey) {
+                    let serviceName = serviceKey;
+                    if (serviceKey === 'ferry') serviceName = 'Sewa & Tiket Ferry / Roro';
+                    if (serviceKey === 'private') serviceName = 'Private Car & Bus Charter';
+                    if (serviceKey === 'group') serviceName = 'Tour Rombongan / Corporate Gathering';
+
+                    let msg = '';
+                    if (this.lang === 'ms') {
+                        msg = `Salam PT. Happy Tour & Travel,\nSaya berminat untuk berkonsultasi mengenai Perkhidmatan: ${serviceName}.\nMohon maklumat rincian sewa dan harga. Terima kasih!`;
+                    } else if (this.lang === 'en') {
+                        msg = `Hello PT. Happy Tour & Travel,\nI am interested in consulting about your Service: ${serviceName}.\nPlease kindly share details and pricing. Thank you!`;
+                    } else {
+                        msg = `Halo PT. Happy Tour & Travel,\nSaya berminat untuk berkonsultasi mengenai Layanan: ${serviceName}.\nMohon rincian informasi dan penawaran harganya. Terima kasih!`;
+                    }
+                    window.open(this.buildWaUrl(msg), '_blank');
+                },
+
+                submitCustomTripWA() {
+                    const d = this.customForm;
+                    let msg = '';
+                    if (this.lang === 'ms') {
+                        msg = `Salam PT. Happy Tour & Travel,\nSaya ingin merancang Percutian Kustom (Custom Trip):\n\n• Destinasi Pilihan: ${d.destination}\n• Cadangan Tarikh: ${d.date || 'Belum ditentukan'}\n• Bilangan Peserta: ${d.travelers} orang\n• Jenis Trip: ${d.tripType}\n\nMohon dibuatkan cadangan sebut harga dan itinerary. Terima kasih!`;
+                    } else if (this.lang === 'en') {
+                        msg = `Hello PT. Happy Tour & Travel,\nI would like to request a Custom Trip Itinerary:\n\n• Destination: ${d.destination}\n• Preferred Date: ${d.date || 'To be defined'}\n• Travelers: ${d.travelers} pax\n• Trip Type: ${d.tripType}\n\nPlease share a custom quotation and itinerary proposal. Thank you!`;
+                    } else {
+                        msg = `Halo PT. Happy Tour & Travel,\nSaya ingin merencanakan Perjalanan Kustom (Custom Trip):\n\n• Destinasi Pilihan: ${d.destination}\n• Tanggal Rencana: ${d.date || 'Belum ditentukan'}\n• Jumlah Peserta: ${d.travelers} orang\n• Jenis Perjalanan: ${d.tripType}\n\nMohon buatkan estimasi penawaran harga dan rekomendasi rute. Terima kasih!`;
+                    }
+                    this.customTripModalOpen = false;
+                    window.open(this.buildWaUrl(msg), '_blank');
+                },
+
+                sendDirectContactWA() {
+                    const f = this.contactForm;
+                    let msg = '';
+                    if (this.lang === 'ms') {
+                        msg = `Salam PT. Happy Tour & Travel,\n\nNama: ${f.name}\nDestinasi: ${f.destination}\nTarikh Perjalanan: ${f.date || 'Belum ditentukan'}\nBilangan Peserta: ${f.travelers} orang\n\nMesej / Pertanyaan:\n"${f.message || 'Mohon maklumat pakej dan harga.'}"\n\nTerima kasih.`;
+                    } else if (this.lang === 'en') {
+                        msg = `Hello PT. Happy Tour & Travel,\n\nName: ${f.name}\nDestination: ${f.destination}\nTravel Date: ${f.date || 'To be defined'}\nTravelers: ${f.travelers} pax\n\nMessage / Inquiry:\n"${f.message || 'Please kindly share package details and pricing.'}"\n\nThank you.`;
+                    } else {
+                        msg = `Halo PT. Happy Tour & Travel,\n\nNama: ${f.name}\nDestinasi Tujuan: ${f.destination}\nTanggal Perjalanan: ${f.date || 'Belum ditentukan'}\nJumlah Peserta: ${f.travelers} orang\n\nPesan / Pertanyaan:\n"${f.message || 'Mohon informasi rincian paket dan penawaran harga.'}"\n\nTerima kasih.`;
+                    }
+                    window.open(this.buildWaUrl(msg), '_blank');
+                },
+
+                // SECTION A Admin: Manage Tour Packages
+                openAddPackageModal() {
+                    this.newPkg = {
+                        title: '',
+                        destination: 'Batam City',
+                        category: 'Explore Package',
+                        currency: 'IDR',
+                        price: 350000,
+                        image: 'https://images.unsplash.com/photo-1512100356356-de1b84283e18?auto=format&fit=crop&w=800&q=80',
+                        description: ''
+                    };
+                    this.addPackageModalOpen = true;
+                },
+
+                saveNewPackage() {
+                    const id = 'pkg-' + Date.now();
+                    const created = {
+                        id,
+                        title: this.newPkg.title,
+                        title_id: this.newPkg.title,
+                        destination: this.newPkg.destination,
+                        category: this.newPkg.category,
+                        duration: '1 Day Trip',
+                        currency: 'IDR',
+                        price: Number(this.newPkg.price) || 0,
+                        image: this.newPkg.image || 'https://images.unsplash.com/photo-1512100356356-de1b84283e18?auto=format&fit=crop&w=800&q=80',
+                        description: this.newPkg.description,
+                        desc_id: this.newPkg.description,
+                        includes: ['Transportasi AC', 'Makan Siang', 'Guide'],
+                        excludes: ['Pengeluaran Pribadi'],
+                        minPax: 1
+                    };
+                    this.packages.unshift(created);
+                    this.savePackagesToStorage();
+                    this.addPackageModalOpen = false;
+                },
+
+                openEditPackageModal(pkg) {
+                    this.editingPackage = JSON.parse(JSON.stringify(pkg));
+                },
+
+                saveEditedPackage() {
+                    const idx = this.packages.findIndex(p => p.id === this.editingPackage.id);
+                    if (idx !== -1) {
+                        this.packages[idx] = JSON.parse(JSON.stringify(this.editingPackage));
+                        this.savePackagesToStorage();
+                    }
+                    this.editingPackage = null;
+                },
+
+                updatePackagePrice(pkg) {
+                    this.savePackagesToStorage();
+                },
+
+                deletePackage(id) {
+                    if (confirm('Apakah Anda yakin ingin menghapus paket ini?')) {
+                        this.packages = this.packages.filter(p => p.id !== id);
+                        this.savePackagesToStorage();
+                    }
+                },
+
+                savePackagesToStorage() {
+                    localStorage.setItem('happytour_packages', JSON.stringify(this.packages));
+                },
+
+                // SECTION B Admin: Manage Page Photos
+                getHeroPhoto() {
+                    return this.pagePhotos.heroBanner || 'https://images.unsplash.com/photo-1512100356356-de1b84283e18?auto=format&fit=crop&w=1000&q=80';
+                },
+
+                previewHeroPhoto() {
+                    if (this.heroPhotoInput) {
+                        this.heroPhotoPreview = this.heroPhotoInput;
+                    }
+                },
+
+                saveHeroPhoto() {
+                    const finalPhotoUrl = this.heroPhotoPreview || this.heroPhotoInput || this.pagePhotos.heroBanner;
+                    this.pagePhotos.heroBanner = finalPhotoUrl;
+                    localStorage.setItem('happytour_page_photos', JSON.stringify(this.pagePhotos));
+                    alert('Foto Hero Banner berhasil diperbarui!');
+                },
+
+                handleFileUpload(event, type) {
+                    const file = event.target.files[0];
+                    if (!file) return;
+
+                    if (file.size > 2 * 1024 * 1024) {
+                        alert('Ukuran file maksimal adalah 2MB');
+                        return;
+                    }
+
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        if (type === 'heroBanner') {
+                            this.heroPhotoPreview = e.target.result;
+                            this.heroPhotoInput = e.target.result;
+                        }
+                    };
+                    reader.readAsDataURL(file);
+                },
+
+                handleGalleryFileUpload(event, index) {
+                    const file = event.target.files[0];
+                    if (!file) return;
+
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        this.gallery[index].url = e.target.result;
+                        this.saveGalleryPhotos();
+                    };
+                    reader.readAsDataURL(file);
+                },
+
+                saveGalleryPhotos() {
+                    localStorage.setItem('happytour_gallery', JSON.stringify(this.gallery));
+                }
+            }
+        }
+    </script>
+</body>
+</html>
